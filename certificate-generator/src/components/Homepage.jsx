@@ -22,7 +22,6 @@ export class ComponentToPrint extends React.PureComponent {
                         <img src={template1} style={{ width: '45rem' }}></img>
         
                         <div className="info" style={{ position: 'absolute', top: '39%', left: '36%', width: '60%' }}>
-                            <h2 style={{ textTransform: 'uppercase', color: '#0e4573', textDecoration: 'underline', marginBottom: '1rem' }}>{this.props.heading === '' ? 'Certificate of Achievement' : this.props.heading}</h2>
                             <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#ff9800', textTransform: 'uppercase', letterSpacing: '3px' }}>This is presented to</h3>
                             <h1 style={{ fontSize: '3rem', color: '#33d5ac' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: '#ff9800' }}>{this.props.desc === '' ? 'for the active participation in the event and for giving efforts,ideas and Knowledge.' : this.props.desc}</p>
@@ -42,7 +41,6 @@ export class ComponentToPrint extends React.PureComponent {
                         <img src={template2} style={{ width: '45rem' }}></img>
         
                         <div className="info" style={{ position: 'absolute', top: '34%', width: '100%' ,display:'flex',flexDirection:'column',alignItems:'center'}}>
-                            <h2 style={{color: 'rgb(255 251 240)', textDecoration: 'underline', marginBottom: '3rem' }}>{this.props.heading === '' ? 'Certificate of Achievement' : this.props.heading}</h2>
                             {/* <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#ff9800', textTransform: 'uppercase', letterSpacing: '3px' }}>This is presented to</h3> */}
                             <h1 style={{ fontSize: '3rem', color: 'rgb(209 254 255)' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: 'rgb(255 251 240)',width:'60%',textAlign:'center' }}>{this.props.desc === '' ? 'for the active participation in the event and for giving efforts,ideas and Knowledge.' : this.props.desc}</p>
@@ -62,7 +60,6 @@ export class ComponentToPrint extends React.PureComponent {
                         <img src={template3} style={{ width: '45rem' }}></img>
         
                         <div className="info" style={{ position: 'absolute', top: '25%', width: '100%' ,display:'flex',flexDirection:'column',alignItems:'center'}}>
-                            <h2 style={{color: 'white', textTransform:'uppercase', letterSpacing:'3px' , marginBottom: '1rem' }}>{this.props.heading === '' ? 'Certificate of Achievement' : this.props.heading}</h2>
                             <h3 style={{ fontSize: '16px', fontWeight: '500', color: 'rgb(255, 152, 0)', textTransform: 'uppercase', letterSpacing: '3px' }}>is hereby awarded to</h3>
                             <h1 style={{ fontSize: '3rem', color: '#e55e5e' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: 'rgb(255 251 240)',width:'60%',textAlign:'center' }}>{this.props.desc === '' ? 'for the active participation in the event and for giving efforts,ideas and Knowledge.' : this.props.desc}</p>
@@ -92,7 +89,6 @@ export class ComponentToPrint extends React.PureComponent {
                         <img src={template5} style={{ width: '45rem' }}></img>
         
                         <div className="info" style={{ position: 'absolute', top: '39%', left: '36%', width: '60%' }}>
-                            <h2 style={{ textTransform: 'uppercase', color: '#781114', textDecoration: 'underline', marginBottom: '1rem' }}>{this.props.heading === '' ? 'Certificate of Achievement' : this.props.heading}</h2>
                             <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#0300b0', textTransform: 'uppercase', letterSpacing: '3px' }}>This is presented to</h3>
                             <h1 style={{ fontSize: '3rem', color: 'black' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: '#0300b0' }}>{this.props.desc === '' ? 'for the active participation in the event and for giving efforts,ideas and Knowledge.' : this.props.desc}</p>
@@ -113,7 +109,6 @@ export class ComponentToPrint extends React.PureComponent {
                         <img src={template6} style={{ width: '45rem' }}></img>
         
                         <div className="info" style={{ position: 'absolute', top: '35%', width: '100%' ,display:'flex',flexDirection:'column',alignItems:'center'}}>
-                            <h2 style={{color: 'white', textTransform:'uppercase', letterSpacing:'3px' , marginBottom: '1rem' }}>{this.props.heading === '' ? 'Certificate of Achievement' : this.props.heading}</h2>
                             <h3 style={{ fontSize: '16px', fontWeight: '500', color: 'rgb(174, 74, 255)', textTransform: 'uppercase', letterSpacing: '3px' }}>is hereby awarded to</h3>
                             <h1 style={{ fontSize: '3rem', color: '#ffffff' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: 'rgb(255 251 240)',width:'60%',textAlign:'center' }}>{this.props.desc === '' ? 'for the active participation in the event and for giving efforts,ideas and Knowledge.' : this.props.desc}</p>
@@ -184,11 +179,8 @@ function Homepage() {
             </Popup>
             <div className="header">
                 <div className="left">
-                    <h2 style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Hash/Hub</h2>
+                    <h2 style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>certificate generator</h2>
                     <button id="toggler" onClick={()=>toggleTheme()}>{theme == 'light'?"Dark Theme":"Light Theme"}</button>
-                </div>
-                <div className="Middle">
-                    <h1>Certificate Generator</h1>
                 </div>
                {/*  <div className="right">
                     <button className="info" onClick={() => setpop(true)}>i</button>
@@ -224,26 +216,9 @@ function Homepage() {
                 <div className="right">
                     <div className="form">
                         <div className="input-box">
-                            <span className="details" style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Heading</span>
-                            <input type="text" placeholder="Enter heading" onChange={e => { setheading(e.target.value) }} />
-                        </div>
-                        <div className="input-box">
                             <span className="details" style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Particpant Name</span>
                             <input type="text" placeholder="Enter participant Name" onChange={e => { setname(e.target.value) }} />
                         </div>
-                        <div className="input-box">
-                            <span className="details" style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Description</span>
-                            <textarea type="text" placeholder="Enter Description" onChange={e => setdesc(e.target.value)} />
-                        </div>
-                        <div className="input-box">
-                            <span className="details" style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Author Name</span>
-                            <input type="text" placeholder="Enter Author Name" onChange={e => setauthor(e.target.value)} />
-                        </div>
-                        <div className="input-box">
-                            <span className="details" style={{color: (theme == "dark")?"white":"rgb(28, 39, 43)"}}>Logo URL</span>
-                            <input type="text" placeholder="Enter logo URL" onChange={e => setlogo(e.target.value)} />
-                        </div>
-
                         {/* <button className="generate" onClick={handlePrint}>Generate  Certificate</button> */}
                         <ReactToPrint
                             trigger={() => <button className="generate" >Print this out!</button>}
