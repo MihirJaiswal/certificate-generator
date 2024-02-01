@@ -286,7 +286,6 @@
     .maincontainer{
         display: flex;
         flex-direction: column;
-        overflow-x: scroll;
     }
 
     .input-box{
@@ -317,6 +316,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        background-size:69vh;
+        flex: 0.5;
+        margin-top: 63px;
     }
 
     .name { 
@@ -326,6 +328,17 @@
       top:4rem;
       left:10px;
       word-break:break-all;
+    }
+
+    .maincontainer .right{
+      border: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .details{
+      margin-top: 5px;
+      padding-top: 0;
     }
 
 }

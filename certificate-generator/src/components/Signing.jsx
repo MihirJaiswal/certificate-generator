@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useState } from 'react'
-import logo from '../assets/GDSClogo.png'
+import Gdsclogo from '../assets/GDSClogo.png'
 function Signing(props) {
 
     const { setIsLoggedIn } = props
@@ -134,7 +134,7 @@ function Signing(props) {
             <li className='mb-1'>If you think your registered email is not available in database please contact us.</li>
             <li className='mb-1'>If you haven't completed the entire course, you are not eligible for the certificate.</li>
          </ul>
-         <img src={logo} className='logo w-40 mx-auto mt-4' alt="" />
+         <img src={Gdsclogo} className='logo w-40 mx-auto mt-4' alt="" />
         </div>
       </div>
       </div>
