@@ -88,7 +88,7 @@
 }
 footer {
   position: fixed;
-  background-color: rgb(28, 39, 43);
+  background-color: black;
   color: white;
   bottom: 0;
   left: 0;
@@ -97,4 +97,10 @@ footer {
   text-align: center;
   font-size: 10px;
   border-top: 1px solid gray;
+}
+
+@media (max-width: 450px){
+  footer{
+    background-color: rgb(28, 39, 43);
+  }
 }

@@ -17,10 +17,12 @@ export class ComponentToPrint extends React.PureComponent {
                 return (
                     <div style={{ position: 'relative', border: '1px solid gray'  }} id="template2">
                         <img src={template4} className='template'></img>
-                            <h1 style={{ fontSize: '3rem', color: 'black',position: 'absolute', top:'9rem',left:'25px',wordBreak:'break-all' }}>{this.props.name === '' ? 'Name' : this.props.name}</h1>
+                            <h1 className='name'>{this.props.name === '' ? 'Name' : this.props.name}</h1>
                         </div>
                 );
             }
+
+            /* style={{ fontSize: '3rem', color: 'black',position: 'absolute', top:'9rem',left:'25px',wordBreak:'break-all' }} */
         }
     }
 }

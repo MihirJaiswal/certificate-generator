@@ -1,15 +1,21 @@
 import React from 'react';
-import Homepage from './components/Homepage';
-import Footer from './components/Footer';
+import Certificate from './pages/Certificate';
+import Home from './pages/Home';
+import PrivateRoute from './components/PrivateRoute';
 import './App.css';
-
+import { Route, Routes} from 'react-router-dom';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   return (
-    <div>
-      <Homepage />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/certificate" element={
+        <PrivateRoute isLoggedIn={true}>
+          <Certificate />
+        </PrivateRoute>
+      } />
+    </Routes>
   )
 }
 

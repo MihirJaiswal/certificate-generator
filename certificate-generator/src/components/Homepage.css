@@ -260,6 +260,19 @@
     width: 47rem;
 }
 
+
+.name { 
+  font-size: 3rem;
+  color: black;
+  position: absolute;
+  top:9rem;
+  left:25px;
+  word-break:break-all;
+}
+.main{
+  background: black;
+}
+
 @media (max-width: 450px){
 
     .header{
@@ -295,9 +308,9 @@
     
     .template{
         width: 19rem;
-        margin-top: 3rem;
         border: none;
     }
+
 
     .maincontainer .middle{
         display: flex;
@@ -305,6 +318,17 @@
         align-items: center;
         flex-direction: column;
     }
+
+    .name { 
+      font-size: 1rem;
+      color: black;
+      position: absolute;
+      top:4rem;
+      left:10px;
+      word-break:break-all;
+    }
+
+   
 
 
 }
