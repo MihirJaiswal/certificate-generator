@@ -17,7 +17,7 @@ export class ComponentToPrint extends React.PureComponent {
                 return (
                     <div style={{ position: 'relative', border: '1px solid gray'  }} id="template2">
                         <img src={template4} className='template'></img>
-                            <h1 className='name'>{this.props.name === '' ? 'Name' : this.props.name}</h1>
+                            <h1 className='name'>{this.props.name === '' ? 'Your Name' : this.props.name}</h1>
                         </div>
                 );
             }
