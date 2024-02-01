@@ -176,8 +176,8 @@
 }
 .popup{
   position: fixed;
-  /* top: 50%; */
-  /* left: 50%; */
+ /*  top: 50%; 
+  left: 50%;  */
   z-index: 100;
   background: rgba;
   background: rgba(0,0,0,0.5);
@@ -327,8 +327,5 @@
       left:10px;
       word-break:break-all;
     }
-
-   
-
 
 }

@@ -53,21 +53,11 @@ function Homepage() {
     const [name, setname] = useState('');
     const [template,settemplate]=useState('template4');
     const componentRef = useRef();
-    const [theme, setTheme] = useState("dark");
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
-    const signout = () => {
-        firebase.auth().signOut();
-    }
-    const toggleTheme =() => {
-        if(theme == "dark") {
-            setTheme("light");
-        }
-        else {
-            setTheme("dark");
-        }
-    }
+    
+    
     return (
         <div className="main">
             <Popup trigger={pop} setpop={setpop} >
@@ -91,7 +81,7 @@ function Homepage() {
                         </div>
                         {/* <button className="generate" onClick={handlePrint}>Generate  Certificate</button> */}
                         <ReactToPrint
-                            trigger={() => <button className="generate" >Generate</button>}
+                            trigger={() => <button className="generate" >Download</button>}
                             content={() => componentRef.current}
                         />
                     </div>
