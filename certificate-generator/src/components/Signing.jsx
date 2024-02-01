@@ -145,35 +145,3 @@ function Signing(props) {
 
 export default Signing
 
-
-
-
-   /*   async function submitHandler(e) {
-        e.preventDefault();
-    
-        // Make an API call to check if the email exists
-        try {
-          const response = await fetch('http://localhost:3001/api/emails', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email }),
-          });
-    
-          if (response.ok) {
-            const data = await response.json();
-            if (data.exists) {
-              setIsLoggedIn(true);
-              toast.success('Logged in successfully');
-              navigate('/certificate');
-            } else {
-              toast.error('Email not found in the database');
-            }
-          } else {
-            toast.error('Error checking email');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      } */ 
