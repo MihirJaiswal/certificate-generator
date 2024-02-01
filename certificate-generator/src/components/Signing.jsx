@@ -124,7 +124,7 @@ function Signing(props) {
               </form>
           </div>
       </div>
-      <div className='my-4 mr-4 bg-white rounded-lg w-full'>
+      <div className='my-4 mr-4 bg-white rounded-lg w-full dark:bg-gray-800'>
         <div className='pr-6 pl-6 pb-4'>
             <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>Instructions</h1>
         </div>
