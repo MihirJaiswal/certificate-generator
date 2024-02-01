@@ -257,18 +257,26 @@
 }
 
 .template{
-    width: 47rem;
+    width: 44rem;
 }
 
 
 .name { 
-  font-size: 3rem;
+  font-size: 2rem;
+  font-weight: 500;
   color: black;
   position: absolute;
-  top:9rem;
-  left:25px;
+  top:10rem;
+  left: 13rem;
   word-break:break-all;
 }
+
+.qrc{
+  position: absolute;
+  top:27rem;
+  left:37rem;
+}
+
 .main{
   background: black;
 }
@@ -306,7 +314,7 @@
     }
     
     .template{
-        width: 19rem;
+        width: 16rem;
         border: none;
     }
 
@@ -329,16 +337,48 @@
       left:10px;
       word-break:break-all;
     }
+    .qrc{
+      
+      position: absolute;
+      top: 4rem;
+      left: 10px;
+    }
 
     .maincontainer .right{
       border: none;
       margin-top: 0;
       padding-top: 0;
+      flex: 0.6;
     }
 
     .details{
       margin-top: 5px;
       padding-top: 0;
     }
+
+    .input-box{
+      margin-top:0;
+      padding-top: 0;
+    }
+
+    .generate{
+      line-height: 1.5;
+      border-radius: 3px;
+      border: navajowhite;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 9px 16px;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      background-color: #4285f4 !important;
+      border-color: rgb(15, 36, 156) !important;
+      text-transform: uppercase;
+      cursor: pointer;
+    
+  }
+
+  .inputqr{
+    margin-top: 15px;
+  }
 
 }

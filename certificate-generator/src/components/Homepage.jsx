@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import "./Homepage.css"
 import { useReactToPrint } from 'react-to-print';
-import template4 from "../assets/Template4.jpeg"
+import template4 from "../assets/Template4.png"
 import ReactToPrint from 'react-to-print';
 import logo from "../assets/logo.png"
+import QRCode from 'react-qr-code'
 
 
 export class ComponentToPrint extends React.PureComponent {
@@ -18,11 +19,16 @@ export class ComponentToPrint extends React.PureComponent {
                     <div style={{ position: 'relative', border: '1px solid gray'  }} id="template2">
                         <img src={template4} className='template'></img>
                             <h1 className='name'>{this.props.name === '' ? 'Your Name' : this.props.name}</h1>
+                            <QRCode
+                                className='md:w-16 w-8 qrc'
+                                value={this.props.qr === '' ? 'qrcode' : this.props.qr}
+                                size={100}
+                            />
                         </div>
                 );
             }
 
-            /* style={{ fontSize: '3rem', color: 'black',position: 'absolute', top:'9rem',left:'25px',wordBreak:'break-all' }} */
+            
         }
     }
 }
@@ -51,13 +57,18 @@ const Popup = (props) => {
 function Homepage() {
     const [pop, setpop] = useState(false);
     const [name, setname] = useState('');
+    const [qrCode, setQrcode] = useState('');
     const [template,settemplate]=useState('template4');
+    const [input, setInput]=useState('');
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
     
-    
+    function handleGenerateQrCode(){
+        setQrcode(input)
+    }
+
     return (
         <div className="main">
             <Popup trigger={pop} setpop={setpop} >
@@ -71,17 +82,25 @@ function Homepage() {
             <div className="maincontainer">
                 
                 <div className="middle">
-                    <ComponentToPrint ref={componentRef} name={name} template={template}/>
+                    <ComponentToPrint ref={componentRef} name={name} template={template} qr={qrCode}/>
                 </div>
                 <div className="right">
                     <div className="form">
                         <div className="input-box mt-4">
-                            <span className="details text-center">Particpant Name</span>
+                            <span className="details text-center">Particpant Details</span>
                             <input type="text" placeholder="Enter your Name" onChange={e => { setname(e.target.value) }} />
                         </div>
+                        <div className='input-box mt-0'>
+                            <input
+                             
+                            onChange={(e) => setInput(e.target.value)}
+                             type="text" name='qr-code' placeholder='Enter your GCSJ link'/>
+                            <button disabled={!input} onClick={handleGenerateQrCode} className="generate w-full inputqr">Generate QR Code</button>
+                        </div>
+                        <div className='qr'> <QRCode className='hidden' id="qrcode" value={qrCode} /> </div>
                         {/* <button className="generate" onClick={handlePrint}>Generate  Certificate</button> */}
                         <ReactToPrint
-                            trigger={() => <button className="generate" >Download</button>}
+                            trigger={() => <button className="generate " >Download</button>}
                             content={() => componentRef.current}
                         />
                     </div>
