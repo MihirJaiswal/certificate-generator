@@ -9,7 +9,7 @@ function Signing(props) {
     const [email, setEmail] = useState("")
     const navigate = useNavigate()
 
-    async function submitHandler(e) {
+   /*  async function submitHandler(e) {
         e.preventDefault();
     
         // Make an API call to check if the email exists
@@ -36,6 +36,18 @@ function Signing(props) {
           }
         } catch (error) {
           console.error('Error:', error);
+        }
+      } */
+
+      function submitHandler(e) {
+        e.preventDefault();
+    
+        if (email.length > 0) {
+          setIsLoggedIn(true);
+          toast.success('Logged in successfully');
+          navigate('/certificate');
+        } else {
+          toast.error('Please enter a valid email.');
         }
       }
       
