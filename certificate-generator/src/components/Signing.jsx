@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useState } from 'react'
-import logo from '../assets/cdgilogo.png'
+import logo from '../assets/GDSClogo.png'
 function Signing(props) {
 
     const { setIsLoggedIn } = props
