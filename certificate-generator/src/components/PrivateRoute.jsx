@@ -7,7 +7,7 @@ function PrivateRoute({isLoggedIn, children}) {
     return children;
   }
   else{
-    return <Navigate to="/home"/>
+    return <Navigate to="/"/>
   }
 }
 
