@@ -294,6 +294,7 @@
     .maincontainer{
         display: flex;
         flex-direction: column;
+        height: max-content;
     }
 
     .input-box{
@@ -314,7 +315,7 @@
     }
     
     .template{
-        width: 16rem;
+        width: 17rem;
         border: none;
     }
 
@@ -324,9 +325,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background-size:69vh;
-        flex: 0.5;
-        margin-top: 63px;
+        background-size:70vh;
+        flex:0.7;
+        margin-top: 60px;
     }
 
     .name { 
@@ -345,14 +346,13 @@
 
     .maincontainer .right{
       border: none;
-      margin-top: 0;
-      padding-top: 0;
-      flex: 0.6;
+
     }
 
     .details{
       margin-top: 5px;
       padding-top: 0;
+      font-size: 20px;
     }
 
     .input-box{
@@ -378,6 +378,11 @@
 
   .inputqr{
     margin-top: 15px;
+  }
+
+  .main{
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
 
 }
