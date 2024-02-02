@@ -103,6 +103,19 @@ function Homepage() {
                             trigger={() => <button className="generate bg-blue-600 hover:bg-blue-800" >Download</button>}
                             content={() => componentRef.current}
                         />
+                        <div className='border-b border-gray-600 mt-8 -mx-4 w-[108%]'></div>
+                        {/* <div className='input-box mt-8'>
+                            <span className='details'>Steps</span>
+                            <div className='steps mt-4 text-sm'>
+                                <ul  className='list-disc list-outside text-base text-gray-500 dark:text-gray-400  pb-2'>
+                                    <li className='mt-2'>Enter your full name in the input box</li>
+                                    <li className='mt-2'>Go to your Google cloud study jams accounT</li>
+                                    <li className='mt-2'>Copy the link from there</li>
+                                    <li className='mt-2'>Paste the link in the second input box and click on Generate QR Code</li>
+                                    <li className='mt-2'>Click on Download to download the certificate</li>
+                                </ul>
+                            </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
