@@ -95,12 +95,12 @@ function Homepage() {
                              
                             onChange={(e) => setInput(e.target.value)}
                              type="text" name='qr-code' placeholder='Enter your GCSJ link'/>
-                            <button disabled={!input} onClick={handleGenerateQrCode} className="generate w-full inputqr">Generate QR Code</button>
+                            <button disabled={!input} onClick={handleGenerateQrCode} className="generate w-full inputqr bg-blue-600 hover:bg-blue-800">Generate QR Code</button>
                         </div>
                         <div className='qr'> <QRCode className='hidden' id="qrcode" value={qrCode} /> </div>
                         {/* <button className="generate" onClick={handlePrint}>Generate  Certificate</button> */}
                         <ReactToPrint
-                            trigger={() => <button className="generate " >Download</button>}
+                            trigger={() => <button className="generate bg-blue-600 hover:bg-blue-800" >Download</button>}
                             content={() => componentRef.current}
                         />
                     </div>
