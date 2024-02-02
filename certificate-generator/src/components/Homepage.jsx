@@ -104,7 +104,7 @@ function Homepage() {
                             content={() => componentRef.current}
                         />
                         <div className='hidden md:block border-b border-gray-600 mt-8 -mx-10'></div>
-                        <div className='input-box md:mt-6 mt-6 md:mt-2 mb-4 md:mb-0 bg-black p-4 rounded border border-gray-600'>
+                        <div className='input-box md:mt-6 mt-6 md:mt-2 mb-6 md:mb-0 bg-black p-4 rounded border border-gray-600'>
                             <span className='details flex'>Steps:</span>
                             <div className='steps mt-2 text-sm'>
                                 <ul  className='list-disc list-outside text-gray-500 text-sm dark:text-gray-400 pl-6'>
