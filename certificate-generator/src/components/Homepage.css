@@ -346,9 +346,8 @@
 
     .maincontainer .right{
       border: none;
-      height: 100vh;
-      overflow: scroll;
-      
+      height: max-content;
+      overflow-y: scroll;
     }
 
     .details{
