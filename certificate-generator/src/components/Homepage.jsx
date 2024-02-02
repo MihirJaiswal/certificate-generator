@@ -103,7 +103,7 @@ function Homepage() {
                             trigger={() => <button className="generate bg-blue-600 hover:bg-blue-800" >Download</button>}
                             content={() => componentRef.current}
                         />
-                        <div className='border-b border-gray-600 mt-8 -mx-4 w-[108%]'></div>
+                        <div className='border-b border-gray-600 mt-8 -mx-4'></div>
                         {/* <div className='input-box mt-8'>
                             <span className='details'>Steps</span>
                             <div className='steps mt-4 text-sm'>
