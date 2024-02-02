@@ -66,7 +66,6 @@
     display: flex;
     justify-content: center;
     height: 100%;
-    padding-top: 1rem;
     border-left: 1px solid gray;
     overflow-y: scroll;
 }
@@ -328,7 +327,7 @@
         background: url(../assets/bg.jpg);
         background-size:95vh;
         background-repeat:repeat;
-        margin-top: 62px;
+        margin-top: -100px;
     }
 
     .name { 
@@ -356,9 +355,7 @@
       font-size: 15px;
     }
 
-    .input-box{
-    }
-
+    
     .generate{
       line-height: 1.5;
       border-radius: 3px;

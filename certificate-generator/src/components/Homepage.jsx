@@ -85,7 +85,7 @@ function Homepage() {
                     <ComponentToPrint ref={componentRef} name={name} template={template} qr={qrCode}/>
                 </div>
                 <div className="right">
-                    <div className="form border-gray-600 border px-5 py-2 md:p-4 bg-[#1C272B] md:bg-gray-900 z-90">
+                    <div className="form border-gray-600 border px-8 py-6 md:px-10 md:py-8 bg-[#1C272B] md:bg-gray-900">
                         <div className="input-box"> 
                             <span className="details text-center">Particpant Details</span>
                             <input type="text" placeholder="Enter your Name" onChange={e => { setname(e.target.value) }} />
@@ -100,22 +100,22 @@ function Homepage() {
                         <div className='qr'> <QRCode className='hidden' id="qrcode" value={qrCode} /> </div>
                         {/* <button className="generate" onClick={handlePrint}>Generate  Certificate</button> */}
                         <ReactToPrint
-                            trigger={() => <button className="generate bg-blue-600 hover:bg-blue-800" >Download</button>}
+                            trigger={() => <button className="generate bg-blue-600 hover:bg-blue-800 w-full" >Download</button>}
                             content={() => componentRef.current}
                         />
-                        <div className='border-b border-gray-600 mt-8 -mx-4'></div>
-                        {/* <div className='input-box mt-8'>
-                            <span className='details'>Steps</span>
-                            <div className='steps mt-4 text-sm'>
-                                <ul  className='list-disc list-outside text-base text-gray-500 dark:text-gray-400  pb-2'>
-                                    <li className='mt-2'>Enter your full name in the input box</li>
-                                    <li className='mt-2'>Go to your Google cloud study jams accounT</li>
-                                    <li className='mt-2'>Copy the link from there</li>
-                                    <li className='mt-2'>Paste the link in the second input box and click on Generate QR Code</li>
-                                    <li className='mt-2'>Click on Download to download the certificate</li>
+                        <div className='hidden md:block border-b border-gray-600 mt-8 -mx-10'></div>
+                        <div className='input-box md:mt-6 mt-6 md:mt-2 mb-4 md:mb-0 bg-black p-4 rounded border border-gray-600'>
+                            <span className='details flex'>Steps:</span>
+                            <div className='steps mt-2 text-sm'>
+                                <ul  className='list-disc list-outside text-gray-500 text-sm dark:text-gray-400 pl-6'>
+                                    <li className='mt-2'><p className='text-gray-300'>Enter your full name in the input box.</p></li>
+                                    <li className='mt-2'><p className='text-gray-300'>Go to your Google cloud study jams account.</p></li>
+                                    <li className='mt-2'><p className='text-gray-300'>Copy the link from there.</p></li>
+                                    <li className='mt-2'><p className='text-gray-300'>Paste the link in the second input box and click on Generate QR Code.</p></li>
+                                    <li className='mt-2'><p className='text-gray-300'>Click on Download to download the certificate.</p></li>
                                 </ul>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
