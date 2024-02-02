@@ -107,7 +107,7 @@ function Homepage() {
                         <div className='input-box md:mt-6 mt-6 md:mt-2 mb-6 md:mb-0 bg-black p-4 rounded border border-gray-600'>
                             <span className='details flex'>Steps:</span>
                             <div className='steps mt-2 text-sm'>
-                                <ul  className='list-disc list-outside text-gray-500 text-sm dark:text-gray-400 pl-6'>
+                                <ul  className='list-disc list-outside text-gray-500 text-sm dark:text-gray-400 pl-4'>
                                     <li className='mt-2'><p className='text-gray-300'>Enter your full name in the input box.</p></li>
                                     <li className='mt-2'><p className='text-gray-300'>Go to your Google cloud study jams account.</p></li>
                                     <li className='mt-2'><p className='text-gray-300'>Copy the link from there.</p></li>
