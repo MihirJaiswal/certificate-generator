@@ -101,7 +101,8 @@
     outline: none;
     border-radius: 5px;
     margin: 6px 0 10px 0;
-    border: 1px solid rgb(107, 107, 107);
+    border: 1px solid #4B5563;
+    background: black;
     padding-left: 15px;
     font-size: 16px;
     border-bottom-width: 2px;
@@ -114,7 +115,7 @@
     outline: none;
     border-radius: 5px;
     margin: 6px 0 10px 0;
-    border: 1px solid rgb(107, 107, 107);
+    border: 1px solid #4B5563;
     padding-left: 15px;
     padding-top: 5px;
     font-size: 16px;
@@ -304,7 +305,7 @@
     }
 
     .generate{
-        width: 270px;
+        width: 272px;
         margin-bottom: 6px;
         margin-top: 2px;
     }
@@ -315,7 +316,7 @@
     }
     
     .template{
-        width: 17rem;
+        width: 20rem;
         border: none;
     }
 
@@ -324,10 +325,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex: 0.7;
         flex-direction: column;
-        background-size:70vh;
-        flex:0.7;
-        margin-top: 60px;
+        background: url(../assets/bg.jpg);
+        background-size: 70vh;
+        background-position: top bottom;
+        margin-top: 62px;
     }
 
     .name { 
@@ -346,18 +349,16 @@
 
     .maincontainer .right{
       border: none;
-
+      height: 80vh;
     }
 
     .details{
       margin-top: 5px;
       padding-top: 0;
-      font-size: 20px;
+      font-size: 15px;
     }
 
     .input-box{
-      margin-top:0;
-      padding-top: 0;
     }
 
     .generate{
@@ -366,7 +367,7 @@
       border: navajowhite;
       font-weight: 700;
       font-size: 14px;
-      padding: 9px 16px;
+      padding: 8px 13px;
       text-align: center;
       color: rgb(255, 255, 255);
       background-color: #4285f4 !important;
@@ -378,11 +379,16 @@
 
   .inputqr{
     margin-top: 15px;
+
   }
 
   .main{
     margin-bottom: 0;
     padding-bottom: 0;
+  }
+
+  .right .form{
+    margin-top: -3px;
   }
 
 }

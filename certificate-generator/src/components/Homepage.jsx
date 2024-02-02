@@ -85,8 +85,8 @@ function Homepage() {
                     <ComponentToPrint ref={componentRef} name={name} template={template} qr={qrCode}/>
                 </div>
                 <div className="right">
-                    <div className="form border-gray-600 border p-4 bg-gray-900 z-90">
-                        <div className="input-box">
+                    <div className="form border-gray-600 border px-7 py-2 md:p-4 bg-[#1C272B] md:bg-gray-900 z-90">
+                        <div className="input-box"> 
                             <span className="details text-center">Particpant Details</span>
                             <input type="text" placeholder="Enter your Name" onChange={e => { setname(e.target.value) }} />
                         </div>
