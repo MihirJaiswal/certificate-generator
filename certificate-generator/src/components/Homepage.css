@@ -264,15 +264,15 @@
   font-weight: 500;
   color: rgb(41, 36, 36);
   position: absolute;
-  top:7.3rem;
-  left: 13.5rem;
+  top:7rem;
+  left: 13.2rem;
   word-break:break-all;
 }
 
 .qrc{
   position: absolute;
-  top:16.6rem;
-  left:4.8rem;
+  top:20.8rem;
+  left:4.5rem;
 }
 
 .main{
@@ -335,13 +335,13 @@
       color: rgb(39, 34, 34);
       position: absolute;
       top:3.46rem;
-      left:98px;
+      left:94px;
       word-break:break-all;
     }
     .qrc{
       position: absolute;
-      top: 5.8rem;
-      left: 2.1rem;
+      top: 7.6rem;
+      left: 2rem;
     }
 
     .maincontainer .right{
