@@ -267,15 +267,15 @@
   font-weight: 500;
   color: black;
   position: absolute;
-  top:10rem;
-  left: 13rem;
+  top:9.3rem;
+  left: 12.2rem;
   word-break:break-all;
 }
 
 .qrc{
   position: absolute;
-  top:27rem;
-  left:37rem;
+  top:25.5rem;
+  left:34.6rem;
 }
 
 .main{
@@ -328,23 +328,23 @@
         flex: 0.7;
         flex-direction: column;
         background: url(../assets/bg.jpg);
-        background-size: 70vh;
-        background-position: top bottom;
+        background-size:95vh;
+        background-repeat:repeat;
         margin-top: 62px;
     }
 
     .name { 
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: black;
       position: absolute;
-      top:4rem;
-      left:10px;
+      top:4.27rem;
+      left:90px;
       word-break:break-all;
     }
     .qrc{
       position: absolute;
-      top: 4rem;
-      left: 10px;
+      top: 9.6rem;
+      left: 15.5rem;
     }
 
     .maincontainer .right{
