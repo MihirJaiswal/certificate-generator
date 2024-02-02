@@ -260,19 +260,19 @@
 
 
 .name { 
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 500;
-  color: black;
+  color: rgb(41, 36, 36);
   position: absolute;
-  top:9.3rem;
-  left: 12.2rem;
+  top:7.3rem;
+  left: 13.5rem;
   word-break:break-all;
 }
 
 .qrc{
   position: absolute;
-  top:25.5rem;
-  left:34.6rem;
+  top:16.6rem;
+  left:4.8rem;
 }
 
 .main{
@@ -331,17 +331,17 @@
     }
 
     .name { 
-      font-size: 0.9rem;
-      color: black;
+      font-size: 0.7rem;
+      color: rgb(39, 34, 34);
       position: absolute;
-      top:4.27rem;
-      left:90px;
+      top:3.46rem;
+      left:98px;
       word-break:break-all;
     }
     .qrc{
       position: absolute;
-      top: 9.6rem;
-      left: 15.5rem;
+      top: 5.8rem;
+      left: 2.1rem;
     }
 
     .maincontainer .right{
