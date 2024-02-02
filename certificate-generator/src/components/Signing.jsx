@@ -101,7 +101,7 @@ function Signing(props) {
       
   return (
       <section className="bg-black h-screen flex justify-center items-center">
-  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 -mt-12 md:mt-0">
       <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-200 dark:text-white">
           <img className="w-10 h-8 mr-2" src="https://static-00.iconduck.com/assets.00/google-cloud-icon-1024x823-wiwlyizc.png" alt="logo"/>   
           Google cloud
