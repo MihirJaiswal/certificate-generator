@@ -105,7 +105,7 @@ function Signing(props) {
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 -mt-12 md:mt-0">
       <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-200 dark:text-white">
           <img className="w-10 h-8 mr-2" src={cloudLogo} alt="logo"/>   
-          Google cloud
+         Certificate Generator
       </a>
       <div className='flex flex-col w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
       <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -133,7 +133,6 @@ function Signing(props) {
          <ul className='list-disc list-outside text-sm text-gray-500 dark:text-gray-400 px-8 pb-2'>
             <li className='mb-1'>please enter your email that you used to register for google cloud study jams.</li>
             <li className='mb-1'>If you think your registered email is not available in database please contact us.</li>
-            <li className='mb-1'>If you haven't completed the entire course, you are not eligible for the certificate.</li>
          </ul>
         </div>
       </div>
