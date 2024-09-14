@@ -1,17 +1,21 @@
 import React, { useRef, useState } from 'react';
-import "./Homepage.css";
+import './Homepage.css';
 import { useReactToPrint } from 'react-to-print';
-import logo from "../assets/cloudLogo.svg";
+import logo from '../assets/cloudLogo.svg';
 import QRCode from 'react-qr-code';
 import Draggable from 'react-draggable';
+import domtoimage from 'dom-to-image-more'; // Use the more stable version
+import { saveAs } from 'file-saver';
 
 export class ComponentToPrint extends React.PureComponent {
     render() {
         return (
-            <div style={{ position: 'relative', }} className='flex items-center justify-center'>
+            <div
+                id="certificate" // Add the ID here for correct targeting
+                style={{ position: 'relative', backgroundColor: this.props.backgroundColor }}
+                className='flex items-center justify-center'
+            >
                 <img src={this.props.template} className='template' alt="template" />
-
-                {/* Draggable Name with Color, Font, Font Size, and Additional Styling */}
                 <Draggable
                     position={this.props.position}
                     onStop={(e, data) => this.props.handleStop('name', data)}
@@ -32,8 +36,6 @@ export class ComponentToPrint extends React.PureComponent {
                         {this.props.name === '' ? '' : this.props.name}
                     </h1>
                 </Draggable>
-
-                {/* Conditionally Render Draggable QR Code */}
                 {this.props.qr && (
                     <Draggable
                         position={this.props.qrPosition}
@@ -47,7 +49,7 @@ export class ComponentToPrint extends React.PureComponent {
                         >
                             <QRCode
                                 value={this.props.qr}
-                                size={this.props.qrSize} // QR code size is dynamic
+                                size={this.props.qrSize}
                             />
                         </div>
                     </Draggable>
@@ -67,20 +69,35 @@ function Homepage() {
     const [color, setColor] = useState('#000000');
     const [font, setFont] = useState('Arial');
     const [fontSize, setFontSize] = useState(24);
-    const [qrSize, setQrSize] = useState(100); // QR code size state
-    const [backgroundColor, setBackgroundColor] = useState('#ffffff'); // Background color state
-    const [fontWeight, setFontWeight] = useState('normal'); // Font weight state
-    const [fontStyle, setFontStyle] = useState('normal'); // Font style state
-    const [textDecoration, setTextDecoration] = useState('none'); // Text decoration state
-    const [undoStack, setUndoStack] = useState([]); // Undo stack state
-    const [redoStack, setRedoStack] = useState([]); // Redo stack state
-    const [preview, setPreview] = useState(false); // Preview mode state
+    const [qrSize, setQrSize] = useState(100);
+    const [backgroundColor, setBackgroundColor] = useState('#ffffff');
+    const [fontWeight, setFontWeight] = useState('normal');
+    const [fontStyle, setFontStyle] = useState('normal');
+    const [textDecoration, setTextDecoration] = useState('none');
+    const [undoStack, setUndoStack] = useState([]);
+    const [redoStack, setRedoStack] = useState([]);
+    const [preview, setPreview] = useState(false);
     const componentRef = useRef();
 
-    // Define the handlePrint function
-    const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
-    });
+    // Function to handle image capture and download
+    const handleDownloadAll = () => {
+        const node = document.getElementById('certificate'); // Ensure the ID matches
+        if (!node) {
+            console.error('Node not found');
+            return;
+        }
+
+        domtoimage.toPng(node)
+            .then((dataUrl) => {
+                const link = document.createElement('a');
+                link.download = 'certificate.png';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch((error) => {
+                console.error('Error capturing certificate:', error);
+            });
+    };
 
     function handleGenerateQrCode() {
         setQrcode(input);
@@ -178,7 +195,7 @@ function Homepage() {
                                 color={color}
                                 font={font}
                                 fontSize={fontSize}
-                                qrSize={qrSize} // Pass QR code size
+                                qrSize={qrSize}
                                 backgroundColor={backgroundColor}
                                 fontWeight={fontWeight}
                                 fontStyle={fontStyle}
@@ -198,7 +215,7 @@ function Homepage() {
                             color={color}
                             font={font}
                             fontSize={fontSize}
-                            qrSize={qrSize} // Pass QR code size
+                            qrSize={qrSize}
                             backgroundColor={backgroundColor}
                             fontWeight={fontWeight}
                             fontStyle={fontStyle}
@@ -224,162 +241,144 @@ function Homepage() {
                             <label className="text-white font-medium text-md block mb-1">Enter Name</label>
                             <input
                                 type="text"
-                                placeholder="Enter your Name"
-                                onChange={e => { setName(e.target.value); handleSaveSettings(); }}
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             />
                         </div>
 
-                        {/* QR Code Generator */}
-                        <div className='input-box mt-2 mb-2'>
-                            <label className="text-white font-medium text-md block mb-1">Enter GCSJ Link</label>
+                        {/* QR Code Input */}
+                        <div className="input-box mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Enter QR Code Data</label>
                             <input
-                                onChange={(e) => setInput(e.target.value)}
                                 type="text"
-                                placeholder='Enter your GCSJ link'
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             />
                             <button
-                                disabled={!input}
                                 onClick={handleGenerateQrCode}
-                                className={`mt-2 w-full py-2 text-white rounded transition ${
-                                    input ? 'bg-blue-600 hover:bg-blue-800' : 'bg-gray-500 cursor-not-allowed'
-                                }`}
+                                className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600 transition"
                             >
                                 Generate QR Code
                             </button>
                         </div>
 
-                        {/* Font Picker */}
-                        <div className="font-picker mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Select Font</label>
-                            <select
-                                onChange={(e) => { setFont(e.target.value); handleSaveSettings(); }}
-                                value={font}
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                                <option value="Arial">Arial</option>
-                                <option value="Courier New">Courier New</option>
-                                <option value="Times New Roman">Times New Roman</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Verdana">Verdana</option>
-                                <option value="Tahoma">Tahoma</option>
-                                <option value="Trebuchet MS">Trebuchet MS</option>
-                                <option value="Lucida Sans">Lucida Sans</option>
-                                <option value="Roboto">Roboto</option>
-                                <option value="Open Sans">Open Sans</option>
-                                <option value="Lato">Lato</option>
-                                <option value="Montserrat">Montserrat</option>
-                                <option value="Poppins">Poppins</option>
-                                <option value="Raleway">Raleway</option>
-                                <option value="Droid Sans">Droid Sans</option>
-                                <option value="Ubuntu">Ubuntu</option>
-                                <option value="Fira Sans">Fira Sans</option>
-                                <option value="PT Sans">PT Sans</option>
-                                <option value="Oswald">Oswald</option>
-                                <option value="Playfair Display">Playfair Display</option>
-                                <option value="Merriweather">Merriweather</option>
-                                <option value="Quicksand">Quicksand</option>
-                                <option value="Exo 2">Exo 2</option>
-                                <option value="Nunito">Nunito</option>
-                                <option value="Archivo">Archivo</option>
-                                <option value="Cinzel">Cinzel</option>
-                                <option value="Bebas Neue">Bebas Neue</option>
-                            </select>
+                        {/* Background Color */}
+                        <div className="color-picker mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Background Color</label>
+                            <input
+                                type="color"
+                                value={backgroundColor}
+                                onChange={(e) => setBackgroundColor(e.target.value)}
+                                className="w-full"
+                            />
                         </div>
 
-                        {/* Font Weight */}
-                        <div className="font-weight mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Font Weight</label>
+                        {/* Font Settings */}
+                        <div className="font-settings mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Font Color</label>
+                            <input
+                                type="color"
+                                value={color}
+                                onChange={(e) => setColor(e.target.value)}
+                                className="w-full"
+                            />
+                            <label className="text-white font-medium text-md block mb-1 mt-2">Font Family</label>
                             <select
-                                onChange={(e) => { setFontWeight(e.target.value); handleSaveSettings(); }}
+                                value={font}
+                                onChange={(e) => setFont(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
+                            >
+                                <option value="Arial">Arial</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                {/* Add more fonts as needed */}
+                            </select>
+                            <label className="text-white font-medium text-md block mb-1 mt-2">Font Size</label>
+                            <input
+                                type="number"
+                                value={fontSize}
+                                onChange={(e) => setFontSize(Number(e.target.value))}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
+                            />
+                            <label className="text-white font-medium text-md block mb-1 mt-2">Font Weight</label>
+                            <select
                                 value={fontWeight}
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onChange={(e) => setFontWeight(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             >
                                 <option value="normal">Normal</option>
                                 <option value="bold">Bold</option>
                                 <option value="bolder">Bolder</option>
-                                <option value="lighter">Lighter</option>
+                                {/* Add more font weights as needed */}
                             </select>
-                        </div>
-
-                        {/* Font Style */}
-                        <div className="font-style mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Font Style</label>
+                            <label className="text-white font-medium text-md block mb-1 mt-2">Font Style</label>
                             <select
-                                onChange={(e) => { setFontStyle(e.target.value); handleSaveSettings(); }}
                                 value={fontStyle}
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onChange={(e) => setFontStyle(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             >
                                 <option value="normal">Normal</option>
                                 <option value="italic">Italic</option>
                                 <option value="oblique">Oblique</option>
+                                {/* Add more font styles as needed */}
                             </select>
-                        </div>
-
-                        {/* Text Decoration */}
-                        <div className="text-decoration mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Text Decoration</label>
+                            <label className="text-white font-medium text-md block mb-1 mt-2">Text Decoration</label>
                             <select
-                                onChange={(e) => { setTextDecoration(e.target.value); handleSaveSettings(); }}
                                 value={textDecoration}
-                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onChange={(e) => setTextDecoration(e.target.value)}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             >
                                 <option value="none">None</option>
                                 <option value="underline">Underline</option>
-                                <option value="overline">Overline</option>
                                 <option value="line-through">Line-through</option>
+                                {/* Add more text decorations as needed */}
                             </select>
                         </div>
 
-                        {/* Color Picker */}
-                        <div className="color-picker mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Select Text Color</label>
+                        {/* QR Code Size */}
+                        <div className="qr-settings mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">QR Code Size</label>
                             <input
-                                type="color"
-                                onChange={(e) => { setColor(e.target.value); handleSaveSettings(); }}
-                                value={color}
-                                className="w-full p-1 rounded bg-gray-700 border-none"
-                            />
-                        </div>
-                        {/* Text Size Slider */}
-                        <div className="text-size mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Text Size: {fontSize}px</label>
-                            <input
-                                type="range"
-                                min="10"
-                                max="100"
-                                value={fontSize}
-                                onChange={(e) => { setFontSize(e.target.value); handleSaveSettings(); }}
-                                className="w-full mt-1"
-                            />
-                        </div>
-                        {/* QR Code Size Slider */}
-                        <div className="qr-size mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">QR Code Size: {qrSize}px</label>
-                            <input
-                                type="range"
-                                min="50"
-                                max="200"
+                                type="number"
                                 value={qrSize}
-                                onChange={(e) => { setQrSize(e.target.value); handleSaveSettings(); }}
-                                className="w-full mt-1"
+                                onChange={(e) => setQrSize(Number(e.target.value))}
+                                className="bg-gray-700 text-white p-1 rounded w-full hover:bg-gray-600 transition"
                             />
-                        </div>
-                        {/* Undo/Redo Buttons */}
-                        <div className="undo-redo mt-2 mb-2">
-                            <button onClick={handleUndo} disabled={undoStack.length === 0} className="bg-gray-600 hover:bg-gray-800 w-full py-2 text-white rounded mt-2 mb-2">
-                                Undo
-                            </button>
-                            <button onClick={handleRedo} disabled={redoStack.length === 0} className="bg-gray-600 hover:bg-gray-800 w-full py-2 text-white rounded mt-2 mb-2">
-                                Redo
-                            </button>
                         </div>
 
-                        <div className='mb-2'>
-                            {/* Download Certificate */}
-                            <button onClick={handlePrint} className="bg-blue-600 hover:bg-blue-800 w-full py-2 text-white rounded mt-4 mb-12">
-                                Download Certificate
+                        {/* Action Buttons */}
+                        <div className="action-buttons mt-4">
+                            <button
+                                onClick={handleSaveSettings}
+                                className="bg-green-500 text-white p-2 rounded hover:bg-green-600 transition"
+                            >
+                                Save Settings
+                            </button>
+                            <button
+                                onClick={handleUndo}
+                                className="bg-yellow-500 text-white p-2 rounded ml-2 hover:bg-yellow-600 transition"
+                            >
+                                Undo
+                            </button>
+                            <button
+                                onClick={handleRedo}
+                                className="bg-yellow-600 text-white p-2 rounded ml-2 hover:bg-yellow-700 transition"
+                            >
+                                Redo
+                            </button>
+                            <button
+                                onClick={handlePreview}
+                                className="bg-purple-500 text-white p-2 rounded ml-2 hover:bg-purple-600 transition"
+                            >
+                                Preview
+                            </button>
+                            <button
+                                onClick={handleDownloadAll}
+                                className="bg-blue-500 text-white p-2 rounded ml-2 hover:bg-blue-600 transition"
+                            >
+                                Download All
                             </button>
                         </div>
                     </div>
