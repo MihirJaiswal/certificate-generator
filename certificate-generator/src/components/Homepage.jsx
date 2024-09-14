@@ -27,12 +27,12 @@ export class ComponentToPrint extends React.PureComponent {
                             fontSize: `${this.props.fontSize}px`,
                         }}
                     >
-                        {this.props.name === '' ? 'Your Name' : this.props.name}
+                        {this.props.name === '' ? '' : this.props.name}
                     </h1>
                 </Draggable>
 
-                {/* Draggable QR Code with Dynamic Size */}
-                {this.props.template && (
+                {/* Conditionally Render Draggable QR Code */}
+                {this.props.qr && (
                     <Draggable
                         position={this.props.qrPosition}
                         onStop={(e, data) => this.props.handleStop('qr', data)}
@@ -44,7 +44,7 @@ export class ComponentToPrint extends React.PureComponent {
                             }}
                         >
                             <QRCode
-                                value={this.props.qr === '' ? 'qrcode' : this.props.qr}
+                                value={this.props.qr}
                                 size={this.props.qrSize} // QR code size is dynamic
                             />
                         </div>
