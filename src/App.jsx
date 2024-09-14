@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Certificate from './pages/Certificate';
 import Home from './pages/Home';
-import PrivateRoute from './components/PrivateRoute';
+import Multiple from './pages/Multiple';
 import './App.css';
-import { Route, Routes} from 'react-router-dom';
-import { useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <Routes>
-      <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn}/>} />
-      <Route path="/certificate" element={
-        <PrivateRoute isLoggedIn={isLoggedIn}>
-          <Certificate />
-        </PrivateRoute>
-      } />
+      <Route path="/" element={<Home />} />
+      <Route path="/certificate" element={<Certificate />} />
+      <Route path="/multiple" element={<Multiple />} />
     </Routes>
-  )
+  );
 }
 
 export default App;

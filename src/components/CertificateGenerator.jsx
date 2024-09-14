@@ -133,7 +133,7 @@ function CertificateGenerator() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-bg1 bg-center bg-cover">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
         <div className="grid grid-cols-1 gap-6">
@@ -160,24 +160,24 @@ function CertificateGenerator() {
       </div>
 
       {/* Action Bar */}
-      <div className="w-1/4 bg-white p-6 shadow-md rounded-md ml-4">
+      <div className="w-1/4 bg-gradient-to-b from-black via-gray-900 to-black p-6 shadow-md ml-4">
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Upload Template</label>
+          <label className="block text-gray-300 font-semibold mb-2">Upload Template</label>
           <input type="file" accept="image/*" onChange={handleUploadTemplate} className="w-full p-2 border rounded-md" />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Enter Names (separated by commas)</label>
+          <label className="block text-gray-300 font-semibold mb-2">Enter Names (separated by commas)</label>
           <textarea
             rows="4"
             onChange={(e) => setNames(e.target.value)}
-            placeholder="Enter names, e.g. John Doe, Jane Doe, ..."
+            placeholder="Enter names, e.g. Mihir Jaiswal, Anshita Rathore, ..."
             className="w-full p-2 border rounded-md"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Font Color</label>
+          <label className="block text-gray-300 font-semibold mb-2">Font Color</label>
           <input
             type="color"
             value={color}
@@ -187,7 +187,7 @@ function CertificateGenerator() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Font Family</label>
+          <label className="block text-gray-300 font-semibold mb-2">Font Family</label>
           <select
             value={font}
             onChange={(e) => setFont(e.target.value)}
@@ -199,7 +199,7 @@ function CertificateGenerator() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Font Size</label>
+          <label className="block text-gray-300 font-semibold mb-2">Font Size</label>
           <input
             type="number"
             value={fontSize}
@@ -209,7 +209,7 @@ function CertificateGenerator() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Font Weight</label>
+          <label className="block text-gray-300 font-semibold mb-2">Font Weight</label>
           <select
             value={fontWeight}
             onChange={(e) => setFontWeight(e.target.value)}
@@ -221,7 +221,7 @@ function CertificateGenerator() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Text Decoration</label>
+          <label className="block text-gray-300 font-semibold mb-2">Text Decoration</label>
           <select
             value={textDecoration}
             onChange={(e) => setTextDecoration(e.target.value)}
@@ -232,7 +232,7 @@ function CertificateGenerator() {
           </select>
         </div>
 
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 mb-4">
           <button
             onClick={handleGenerateCertificates}
             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
@@ -240,14 +240,8 @@ function CertificateGenerator() {
             Generate Certificates
           </button>
           <button
-            onClick={handlePrint}
-            className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600"
-          >
-            Print First
-          </button>
-          <button
             onClick={handleDownloadAll}
-            className="bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600"
+            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
           >
             Download All
           </button>

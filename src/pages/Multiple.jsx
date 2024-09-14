@@ -1,13 +1,13 @@
 import React from 'react'
+import CertificateGenerator from '../components/CertificateGenerator'
 import Footer from '../components/Footer'
-import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 
-export default function Home() {
+export default function Multiple() {
   return (
     <div>
     <Navbar/>
-      <Hero/>
+      <CertificateGenerator/>
       <Footer/>
     </div>
   )

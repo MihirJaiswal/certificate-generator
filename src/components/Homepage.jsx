@@ -175,11 +175,6 @@ function Homepage() {
 
     return (
         <div className="main">
-            <div className="header">
-                <div className="left">
-                    <img src={logo} className='logo w-8' alt="" />
-                </div>
-            </div>
             <div className="maincontainer">
                 <div className="middle">
                     {preview && (
