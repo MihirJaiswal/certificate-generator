@@ -342,8 +342,6 @@ function Homepage() {
                                 className="w-full p-1 rounded bg-gray-700 border-none"
                             />
                         </div>
-
-                 
                         {/* Text Size Slider */}
                         <div className="text-size mt-2 mb-2">
                             <label className="text-white font-medium text-md block mb-1">Text Size: {fontSize}px</label>
@@ -356,7 +354,6 @@ function Homepage() {
                                 className="w-full mt-1"
                             />
                         </div>
-
                         {/* QR Code Size Slider */}
                         <div className="qr-size mt-2 mb-2">
                             <label className="text-white font-medium text-md block mb-1">QR Code Size: {qrSize}px</label>
@@ -369,8 +366,6 @@ function Homepage() {
                                 className="w-full mt-1"
                             />
                         </div>
-
-
                         {/* Undo/Redo Buttons */}
                         <div className="undo-redo mt-2 mb-2">
                             <button onClick={handleUndo} disabled={undoStack.length === 0} className="bg-gray-600 hover:bg-gray-800 w-full py-2 text-white rounded mt-2 mb-2">
