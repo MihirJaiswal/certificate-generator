@@ -8,10 +8,10 @@ import Draggable from 'react-draggable';
 export class ComponentToPrint extends React.PureComponent {
     render() {
         return (
-            <div style={{ position: 'relative' }} className='flex items-center justify-center'>
+            <div style={{ position: 'relative', backgroundColor: this.props.backgroundColor }} className='flex items-center justify-center'>
                 <img src={this.props.template} className='template' alt="template" />
 
-                {/* Draggable Name with Color, Font, and Font Size */}
+                {/* Draggable Name with Color, Font, Font Size, and Additional Styling */}
                 <Draggable
                     position={this.props.position}
                     onStop={(e, data) => this.props.handleStop('name', data)}
@@ -24,6 +24,9 @@ export class ComponentToPrint extends React.PureComponent {
                             color: this.props.color,
                             fontFamily: this.props.font,
                             fontSize: `${this.props.fontSize}px`,
+                            fontWeight: this.props.fontWeight,
+                            fontStyle: this.props.fontStyle,
+                            textDecoration: this.props.textDecoration,
                         }}
                     >
                         {this.props.name === '' ? '' : this.props.name}
@@ -65,6 +68,13 @@ function Homepage() {
     const [font, setFont] = useState('Arial');
     const [fontSize, setFontSize] = useState(24);
     const [qrSize, setQrSize] = useState(100); // QR code size state
+    const [backgroundColor, setBackgroundColor] = useState('#ffffff'); // Background color state
+    const [fontWeight, setFontWeight] = useState('normal'); // Font weight state
+    const [fontStyle, setFontStyle] = useState('normal'); // Font style state
+    const [textDecoration, setTextDecoration] = useState('none'); // Text decoration state
+    const [undoStack, setUndoStack] = useState([]); // Undo stack state
+    const [redoStack, setRedoStack] = useState([]); // Redo stack state
+    const [preview, setPreview] = useState(false); // Preview mode state
     const componentRef = useRef();
 
     // Define the handlePrint function
@@ -97,6 +107,55 @@ function Homepage() {
         }
     }
 
+    function handleUndo() {
+        if (undoStack.length > 0) {
+            const lastState = undoStack.pop();
+            setRedoStack([...redoStack, { name, qrCode, template, position, qrPosition, color, font, fontSize, qrSize, backgroundColor, fontWeight, fontStyle, textDecoration }]);
+            setName(lastState.name);
+            setQrcode(lastState.qrCode);
+            setTemplate(lastState.template);
+            setPosition(lastState.position);
+            setQrPosition(lastState.qrPosition);
+            setColor(lastState.color);
+            setFont(lastState.font);
+            setFontSize(lastState.fontSize);
+            setQrSize(lastState.qrSize);
+            setBackgroundColor(lastState.backgroundColor);
+            setFontWeight(lastState.fontWeight);
+            setFontStyle(lastState.fontStyle);
+            setTextDecoration(lastState.textDecoration);
+        }
+    }
+
+    function handleRedo() {
+        if (redoStack.length > 0) {
+            const nextState = redoStack.pop();
+            setUndoStack([...undoStack, { name, qrCode, template, position, qrPosition, color, font, fontSize, qrSize, backgroundColor, fontWeight, fontStyle, textDecoration }]);
+            setName(nextState.name);
+            setQrcode(nextState.qrCode);
+            setTemplate(nextState.template);
+            setPosition(nextState.position);
+            setQrPosition(nextState.qrPosition);
+            setColor(nextState.color);
+            setFont(nextState.font);
+            setFontSize(nextState.fontSize);
+            setQrSize(nextState.qrSize);
+            setBackgroundColor(nextState.backgroundColor);
+            setFontWeight(nextState.fontWeight);
+            setFontStyle(nextState.fontStyle);
+            setTextDecoration(nextState.textDecoration);
+        }
+    }
+
+    function handleSaveSettings() {
+        setUndoStack([...undoStack, { name, qrCode, template, position, qrPosition, color, font, fontSize, qrSize, backgroundColor, fontWeight, fontStyle, textDecoration }]);
+        setRedoStack([]);
+    }
+
+    function handlePreview() {
+        setPreview(!preview);
+    }
+
     return (
         <div className="main">
             <div className="header">
@@ -106,19 +165,46 @@ function Homepage() {
             </div>
             <div className="maincontainer">
                 <div className="middle">
-                    <ComponentToPrint
-                        ref={componentRef}
-                        name={name}
-                        template={template}
-                        qr={qrCode}
-                        position={position}
-                        qrPosition={qrPosition}
-                        handleStop={handleStop}
-                        color={color}
-                        font={font}
-                        fontSize={fontSize}
-                        qrSize={qrSize} // Pass QR code size
-                    />
+                    {preview && (
+                        <div className="preview">
+                            <ComponentToPrint
+                                ref={componentRef}
+                                name={name}
+                                template={template}
+                                qr={qrCode}
+                                position={position}
+                                qrPosition={qrPosition}
+                                handleStop={handleStop}
+                                color={color}
+                                font={font}
+                                fontSize={fontSize}
+                                qrSize={qrSize} // Pass QR code size
+                                backgroundColor={backgroundColor}
+                                fontWeight={fontWeight}
+                                fontStyle={fontStyle}
+                                textDecoration={textDecoration}
+                            />
+                        </div>
+                    )}
+                    {!preview && (
+                        <ComponentToPrint
+                            ref={componentRef}
+                            name={name}
+                            template={template}
+                            qr={qrCode}
+                            position={position}
+                            qrPosition={qrPosition}
+                            handleStop={handleStop}
+                            color={color}
+                            font={font}
+                            fontSize={fontSize}
+                            qrSize={qrSize} // Pass QR code size
+                            backgroundColor={backgroundColor}
+                            fontWeight={fontWeight}
+                            fontStyle={fontStyle}
+                            textDecoration={textDecoration}
+                        />
+                    )}
                 </div>
                 <div className="right bg-gray-950">
                     <div className="form px-4 py-4 md:px-6 md:py-6 shadow-lg bg-gray-950">
@@ -139,7 +225,7 @@ function Homepage() {
                             <input
                                 type="text"
                                 placeholder="Enter your Name"
-                                onChange={e => { setName(e.target.value) }}
+                                onChange={e => { setName(e.target.value); handleSaveSettings(); }}
                                 className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
@@ -168,7 +254,7 @@ function Homepage() {
                         <div className="font-picker mt-2 mb-2">
                             <label className="text-white font-medium text-md block mb-1">Select Font</label>
                             <select
-                                onChange={(e) => setFont(e.target.value)}
+                                onChange={(e) => { setFont(e.target.value); handleSaveSettings(); }}
                                 value={font}
                                 className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
@@ -202,13 +288,68 @@ function Homepage() {
                             </select>
                         </div>
 
+                        {/* Font Weight */}
+                        <div className="font-weight mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Font Weight</label>
+                            <select
+                                onChange={(e) => { setFontWeight(e.target.value); handleSaveSettings(); }}
+                                value={fontWeight}
+                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="normal">Normal</option>
+                                <option value="bold">Bold</option>
+                                <option value="bolder">Bolder</option>
+                                <option value="lighter">Lighter</option>
+                            </select>
+                        </div>
+
+                        {/* Font Style */}
+                        <div className="font-style mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Font Style</label>
+                            <select
+                                onChange={(e) => { setFontStyle(e.target.value); handleSaveSettings(); }}
+                                value={fontStyle}
+                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="normal">Normal</option>
+                                <option value="italic">Italic</option>
+                                <option value="oblique">Oblique</option>
+                            </select>
+                        </div>
+
+                        {/* Text Decoration */}
+                        <div className="text-decoration mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Text Decoration</label>
+                            <select
+                                onChange={(e) => { setTextDecoration(e.target.value); handleSaveSettings(); }}
+                                value={textDecoration}
+                                className="bg-gray-700 text-white p-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="none">None</option>
+                                <option value="underline">Underline</option>
+                                <option value="overline">Overline</option>
+                                <option value="line-through">Line-through</option>
+                            </select>
+                        </div>
+
                         {/* Color Picker */}
                         <div className="color-picker mt-2 mb-2">
                             <label className="text-white font-medium text-md block mb-1">Select Text Color</label>
                             <input
                                 type="color"
-                                onChange={(e) => setColor(e.target.value)}
+                                onChange={(e) => { setColor(e.target.value); handleSaveSettings(); }}
                                 value={color}
+                                className="w-full p-1 rounded bg-gray-700 border-none"
+                            />
+                        </div>
+
+                        {/* Background Color Picker */}
+                        <div className="background-color mt-2 mb-2">
+                            <label className="text-white font-medium text-md block mb-1">Select Background Color</label>
+                            <input
+                                type="color"
+                                onChange={(e) => { setBackgroundColor(e.target.value); handleSaveSettings(); }}
+                                value={backgroundColor}
                                 className="w-full p-1 rounded bg-gray-700 border-none"
                             />
                         </div>
@@ -221,7 +362,7 @@ function Homepage() {
                                 min="10"
                                 max="100"
                                 value={fontSize}
-                                onChange={(e) => setFontSize(e.target.value)}
+                                onChange={(e) => { setFontSize(e.target.value); handleSaveSettings(); }}
                                 className="w-full mt-1"
                             />
                         </div>
@@ -234,9 +375,26 @@ function Homepage() {
                                 min="50"
                                 max="200"
                                 value={qrSize}
-                                onChange={(e) => setQrSize(e.target.value)}
+                                onChange={(e) => { setQrSize(e.target.value); handleSaveSettings(); }}
                                 className="w-full mt-1"
                             />
+                        </div>
+
+                        {/* Preview Mode Toggle */}
+                       {/*  <div className="preview-toggle mt-2 mb-2">
+                            <button onClick={handlePreview} className="bg-blue-600 hover:bg-blue-800 w-full py-2 text-white rounded mt-4 mb-2">
+                                {preview ? 'Hide Preview' : 'Show Preview'}
+                            </button>
+                        </div> */}
+
+                        {/* Undo/Redo Buttons */}
+                        <div className="undo-redo mt-2 mb-2">
+                            <button onClick={handleUndo} disabled={undoStack.length === 0} className="bg-gray-600 hover:bg-gray-800 w-full py-2 text-white rounded mt-2 mb-2">
+                                Undo
+                            </button>
+                            <button onClick={handleRedo} disabled={redoStack.length === 0} className="bg-gray-600 hover:bg-gray-800 w-full py-2 text-white rounded mt-2 mb-2">
+                                Redo
+                            </button>
                         </div>
 
                         <div className='mb-2'>
