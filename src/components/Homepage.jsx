@@ -8,7 +8,7 @@ import Draggable from 'react-draggable';
 export class ComponentToPrint extends React.PureComponent {
     render() {
         return (
-            <div style={{ position: 'relative', backgroundColor: this.props.backgroundColor }} className='flex items-center justify-center'>
+            <div style={{ position: 'relative', }} className='flex items-center justify-center'>
                 <img src={this.props.template} className='template' alt="template" />
 
                 {/* Draggable Name with Color, Font, Font Size, and Additional Styling */}
@@ -343,17 +343,7 @@ function Homepage() {
                             />
                         </div>
 
-                        {/* Background Color Picker */}
-                        <div className="background-color mt-2 mb-2">
-                            <label className="text-white font-medium text-md block mb-1">Select Background Color</label>
-                            <input
-                                type="color"
-                                onChange={(e) => { setBackgroundColor(e.target.value); handleSaveSettings(); }}
-                                value={backgroundColor}
-                                className="w-full p-1 rounded bg-gray-700 border-none"
-                            />
-                        </div>
-
+                 
                         {/* Text Size Slider */}
                         <div className="text-size mt-2 mb-2">
                             <label className="text-white font-medium text-md block mb-1">Text Size: {fontSize}px</label>
@@ -380,12 +370,6 @@ function Homepage() {
                             />
                         </div>
 
-                        {/* Preview Mode Toggle */}
-                       {/*  <div className="preview-toggle mt-2 mb-2">
-                            <button onClick={handlePreview} className="bg-blue-600 hover:bg-blue-800 w-full py-2 text-white rounded mt-4 mb-2">
-                                {preview ? 'Hide Preview' : 'Show Preview'}
-                            </button>
-                        </div> */}
 
                         {/* Undo/Redo Buttons */}
                         <div className="undo-redo mt-2 mb-2">
