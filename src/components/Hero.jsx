@@ -2,12 +2,13 @@ import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Award, CheckCircle, Lock, Github } from 'lucide-react';
 import Particles from './Particles';
+import Certificate from './Certificate';
 
 
 export default function Hero() {
   const [email, setEmail] = useState('');
 
-    const color = "#CE93D8";
+    const color = "#ffffff";
    
   
 
@@ -29,8 +30,8 @@ export default function Hero() {
     },
     {
       icon: <Lock className="h-6 w-6 text-red-400" />,
-      title: 'Secure & Verifiable',
-      description: 'Each certificate comes with a unique QR code.',
+      title: 'QR code generation',
+      description: 'Generate and add QR code easily.',
     },
   ];
 
@@ -39,27 +40,30 @@ export default function Hero() {
       <main className="relative  z-10">
         {/* Hero Section */}
       
-        <section className="container  bg-gradient-to-b from-black via-purple-950 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center lg:justify-center">
+        <section className=" bg-gradient-to-b from-black via-purple-950 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center gap-x-12 lg:justify-center">
         
           <div className="">
           <Particles
-        className="absolute inset-0"
-        quantity={500}
-        ease={80}
+        className="absolute inset-0 pointer-events-none"
+        quantity={400}
+        ease={100}
         color={color}
+        
+        size={1}
         refresh
       />
+      <div className="absolute pointer-events-none inset-0 w-full h-full bg-gradient-to-r from-black via-gray-900 to-gray-950 blur-xl rounded-lg opacity-60 z-0"></div>
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-extrabold mb-10 text-white"
+              className="text-5xl relative md:text-6xl lg:text-[5rem] font-extrabold mb-5 md:mb-10 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               Certi-
-              <span className='text-red-400'>Gen</span>
+              <span className='text-red-50  '>GEN</span>
             </motion.h1>
             <motion.p
-              className="md:mb-3 mb-2 text-lg lg:font-bold leading-2 tracking-wide text-gray-900 lg:text-3xl dark:text-white"
+              className="md:mb-3 relative mb-2 text-lg lg:font-bold leading-2 tracking-wide text-gray-900 lg:text-3xl dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -67,7 +71,7 @@ export default function Hero() {
               Generate, customize, and manage 
             </motion.p>
             <motion.p
-              className="mb-4  lg:font-bold leading-6 tracking-wide text-gray-900 text-lg lg:text-3xl dark:text-white"
+              className="mb-10 lg:mb-6 relative lg:font-bold leading-6 tracking-wide text-gray-900 text-lg lg:text-3xl dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -75,61 +79,27 @@ export default function Hero() {
                certificates with ease.
             </motion.p>
             <motion.div  
-              className="flex flex-row justify-center items-center gap-4 lg:pt-6"
+              className="flex relative flex-row justify-center items-center gap-4 lg:pt-6 z-50"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <button className="bg-[#5620AC] text-gray-50 px-6 py-3 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:shadow-xl transition-all">
+              <a href="/generate">
+              <button className="bg-[#5620AC] text-gray-50 px-6 py-3 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold  cursor-pointer transition-all">
                 Start Creating
               </button>
-              <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:shadow-xl transition-all">
+              </a>
+              <a href="https://github.com/MihirJaiswal/certificate-generator">
+              <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold  cursor-pointer transition-all">
               <Github/>
                 <span>Source</span>
               </button>
+              </a>
             </motion.div>
           </div>
 
           {/* Certificate Preview Section */}
-          <div className="lg:w-1/2 lg:pl-8">
-            <section id="preview" className="py-16">
-              <div className="relative max-w-2xl mx-auto">
-                {/* Gradient behind the certificate */}
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 blur-xl rounded-lg opacity-30 z-0"></div>
-
-                {/* Certificate container */}
-                <div className="relative bg-gradient-to-r from-gray-900 via-gray-900 to-gray-950 border border-gray-600 md:p-8 p-4 shadow-2xl z-10">
-                  <div className="border-2 border-gray-600 p-6  bg-white certificate-preview shadow-md">
-                    <h3 className="text-md md:text-3xl font-serif font-semibold text-center mb-6 text-gray-800">
-                      Certificate of Achievement
-                    </h3>
-                    <p className="text-center text-md md:text-xl md:mb-6 mb-3 text-gray-700">
-                      This is to certify that
-                    </p>
-                    <p className="text-md md:text-3xl font-bold text-center mb-3 md:mb-6 text-gray-800">
-                      [Your Name]
-                    </p>
-                    <p className="text-sm md:text-xl mb-6 md:mb-6 text-gray-700">
-                      has successfully completed the course
-                    </p>
-                    <p className="text-md md:text-2xl font-semibold text-center mb-3 md:mb-6 text-gray-800">
-                      [Course Name]
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="text-center text-gray-800">
-                        <p className="font-semibold md:text-lg text-sm">[Date]</p>
-                        <p className="text-sm">Date</p>
-                      </div>
-                      <div className="text-center text-gray-800">
-                        <p className="font-semibold md:text-lg text-sm">[Signature]</p>
-                        <p className="text-sm">Instructor</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
+         <Certificate/>
         </section>
 
         {/* Decorative Elements */}

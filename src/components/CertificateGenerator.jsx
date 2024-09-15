@@ -141,7 +141,7 @@ function CertificateGenerator() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-900">
+    <div className="flex flex-col md:flex-row min-h-screen  bg-gradient-to-b from-black via-purple-950 to-gray-950">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
         <div className="grid grid-cols-1 gap-6">
