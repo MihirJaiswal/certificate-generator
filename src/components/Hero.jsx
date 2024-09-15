@@ -1,10 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Award, CheckCircle, Lock, Github } from 'lucide-react';
+import Particles from './Particles';
 
 
 export default function Hero() {
   const [email, setEmail] = useState('');
+
+    const color = "#CE93D8";
+   
+  
 
   const features = [
     {
@@ -30,21 +35,31 @@ export default function Hero() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-purple-950 to-gray-950 text-gray-100">
-      <main className="relative z-10">
+    <div className="relative min-h-screen text-gray-100">
+      <main className="relative  z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center lg:justify-center">
+      
+        <section className="container  bg-gradient-to-b from-black via-purple-950 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center lg:justify-center">
+        
           <div className="">
+          <Particles
+        className="absolute inset-0"
+        quantity={500}
+        ease={80}
+        color={color}
+        refresh
+      />
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-extrabold mb-10 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              CertiGen
+              Certi-
+              <span className='text-red-400'>Gen</span>
             </motion.h1>
             <motion.p
-              className="md:mb-3 mb-2 text-lg lg:font-semibold leading-2 tracking-wide text-gray-900 lg:text-3xl dark:text-white"
+              className="md:mb-3 mb-2 text-lg lg:font-bold leading-2 tracking-wide text-gray-900 lg:text-3xl dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -52,7 +67,7 @@ export default function Hero() {
               Generate, customize, and manage 
             </motion.p>
             <motion.p
-              className="mb-4  lg:font-semibold leading-6 tracking-wide text-gray-900 text-lg lg:text-3xl dark:text-white"
+              className="mb-4  lg:font-bold leading-6 tracking-wide text-gray-900 text-lg lg:text-3xl dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -83,7 +98,7 @@ export default function Hero() {
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 blur-xl rounded-lg opacity-30 z-0"></div>
 
                 {/* Certificate container */}
-                <div className="relative bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 border border-gray-600 md:p-8 p-4 shadow-2xl z-10">
+                <div className="relative bg-gradient-to-r from-gray-900 via-gray-900 to-gray-950 border border-gray-600 md:p-8 p-4 shadow-2xl z-10">
                   <div className="border-2 border-gray-600 p-6  bg-white certificate-preview shadow-md">
                     <h3 className="text-md md:text-3xl font-serif font-semibold text-center mb-6 text-gray-800">
                       Certificate of Achievement
@@ -125,8 +140,8 @@ export default function Hero() {
         </div>
 
         {/* Features Section */}
-        <section id="features" className="pb-16">
-          <div className="container mx-auto px-4">
+        <section id="features" className="pb-16 pt-10 bg-[#040713] ">
+          <div className="container mx-auto px-4 relative font-poppins">
             <h2 className="text-4xl font-bold text-center mb-12 text-gray-100">
               Features
             </h2>
