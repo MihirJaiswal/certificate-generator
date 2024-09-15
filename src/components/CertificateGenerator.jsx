@@ -49,7 +49,7 @@ export class CertificatePreview extends React.PureComponent {
               fontStyle: fontStyle,
               textDecoration: textDecoration,
               outline: 'none', // Remove outline
-              boxShadow: 'none', 
+              boxShadow: 'none',
             }}
           >
             {name}
@@ -88,6 +88,7 @@ function CertificateGenerator() {
   const componentRefs = useRef([]);
   const [input, setInput] = useState('');
   const [qrCode, setQrcode] = useState('');
+  const [showInstructions, setShowInstructions] = useState(true);
 
   const handlePrint = useReactToPrint({
     content: () => componentRefs.current[0], // Print the first certificate
@@ -138,39 +139,66 @@ function CertificateGenerator() {
   function handleGenerateCertificates() {
     const nameList = names.split(',').map((name) => name.trim());
     setGeneratedNames(nameList);
+    setShowInstructions(false); // Hide instructions after generating certificates
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen  bg-gradient-to-b from-black via-purple-950 to-gray-950">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-purple-950 to-gray-950">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
-        <div className="grid grid-cols-1 gap-6">
-          {generatedNames.map((name, index) => (
-            <div key={index} className="relative shadow-lg rounded-lg overflow-hidden">
-              <CertificatePreview
-                innerRef={(el) => (componentRefs.current[index] = el)}
-                name={name}
-                template={template}
-                position={position}
-                qrPosition={qrPosition}
-                handleStop={handleStop}
-                color={color}
-                font={font}
-                fontSize={fontSize}
-                qrSize={qrSize}
-                fontWeight={fontWeight}
-                fontStyle={fontStyle}
-                textDecoration={textDecoration}
-                qr={qrCode}
-                disableDrag={true}
-              />
-            </div>
-          ))}
+        {showInstructions && generatedNames.length === 0 ? (
+          <div className="bg-gray-950 border border-gray-700 p-6 rounded-lg text-gray-100 shadow-lg">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-8 text-blue-400">How to Use the Certificate Generator</h2>
+          <ol className="list-decimal list-inside space-y-2 lg:space-y-4 lg:text-lg">
+            <li>
+              <span className="font-semibold">Upload</span> a template image for your certificate.
+            </li>
+            <li>
+              <span className="font-semibold">Enter names</span> separated by commas.
+            </li>
+            <li>
+              <span className="font-semibold">Click "Generate"</span> to create your certificates.
+            </li>
+            <li>
+              <span className="font-semibold">Enter QR code data</span> if needed.
+            </li>
+            <li>
+              <span className="font-semibold">Customize</span> the font, color, and position for the name and QR code.
+            </li>
+            <li>
+              <span className="font-semibold">Preview and download</span> all generated certificates as PNG files.
+            </li>
+          </ol>
         </div>
+
+        ) : (
+          <div className="grid grid-cols-1 gap-6">
+            {generatedNames.map((name, index) => (
+              <div key={index} className="relative shadow-lg rounded-lg overflow-hidden">
+                <CertificatePreview
+                  innerRef={(el) => (componentRefs.current[index] = el)}
+                  name={name}
+                  template={template}
+                  position={position}
+                  qrPosition={qrPosition}
+                  handleStop={handleStop}
+                  color={color}
+                  font={font}
+                  fontSize={fontSize}
+                  qrSize={qrSize}
+                  fontWeight={fontWeight}
+                  fontStyle={fontStyle}
+                  textDecoration={textDecoration}
+                  qr={qrCode}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Action Bar */}
-      <div className="w-full md:w-1/4 bg-gradient-to-b from-black via-gray-900 to-black p-6 shadow-md md:ml-4">
+      <div className="w-full md:w-1/4 bg-black lg:border-l border-gray-700 p-6 shadow-md md:ml-4 lg:h-screen lg:overflow-scroll">
         <div className="mb-4">
           <label className="block text-gray-300 font-semibold mb-2">Upload Template</label>
           <input type="file" accept="image/*" onChange={handleUploadTemplate} className="w-full p-2 border rounded-md" />
@@ -181,9 +209,18 @@ function CertificateGenerator() {
           <textarea
             rows="4"
             onChange={(e) => setNames(e.target.value)}
-            placeholder="Enter names, e.g. Mihir Jaiswal, Anshita Rathore, ..."
+            placeholder="Enter names, e.g. Mihir Jaiswal, Jhon Doe, ..."
             className="w-full p-2 border rounded-md"
           />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Generate Certificates</label>
+          <button
+            onClick={handleGenerateCertificates}
+            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
+            Generate
+          </button>
         </div>
 
         <div className="mb-4">
@@ -200,16 +237,6 @@ function CertificateGenerator() {
           >
             Generate QR Code
           </button>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-300 font-semibold mb-2">Background Color</label>
-          <input
-            type="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            className="w-full h-10 bg-gray-700 rounded-md"
-          />
         </div>
 
         <div className="mb-4">
@@ -310,15 +337,7 @@ function CertificateGenerator() {
           </select>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-300 font-semibold mb-2">Generate Certificates</label>
-          <button
-            onClick={handleGenerateCertificates}
-            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-          >
-            Generate
-          </button>
-        </div>
+        
 
         <div className="flex space-x-4 mb-8">
           <button
