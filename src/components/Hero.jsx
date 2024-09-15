@@ -59,7 +59,7 @@ export default function Hero() {
             >
                certificates with ease.
             </motion.p>
-            <motion.div
+            <motion.div  
               className="flex flex-row justify-center items-center gap-4 lg:pt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
