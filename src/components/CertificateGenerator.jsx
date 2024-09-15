@@ -1,11 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import Draggable from 'react-draggable';
 import QRCode from 'react-qr-code';
-import html2canvas from 'html2canvas';
-import domtoimage from 'dom-to-image';
-
-import Color from 'color'; // Ensure to install this library
+import Draggable from 'react-draggable';
+import domtoimage from 'dom-to-image-more';
+import Color from 'color';
 
 export class CertificatePreview extends React.PureComponent {
   render() {
@@ -31,7 +29,7 @@ export class CertificatePreview extends React.PureComponent {
 
     return (
       <div
-        className="relative w-full h-auto p-4 bg-white border border-gray-300 rounded-lg"
+        className="relative w-full h-auto p-4"
         ref={innerRef} // Use ref for capturing screenshot
       >
         <img src={template} alt="template" className="w-full h-auto" />
@@ -39,9 +37,10 @@ export class CertificatePreview extends React.PureComponent {
         <Draggable
           position={position}
           onStop={(e, data) => handleStop('name', data)}
+          defaultClassName="no-border"
         >
           <h1
-            className="absolute cursor-move whitespace-nowrap"
+            className="absolute cursor-move whitespace-nowrap top-0"
             style={{
               color: convertedColor,
               fontFamily: font,
@@ -49,6 +48,8 @@ export class CertificatePreview extends React.PureComponent {
               fontWeight: fontWeight,
               fontStyle: fontStyle,
               textDecoration: textDecoration,
+              outline: 'none', // Remove outline
+              boxShadow: 'none', 
             }}
           >
             {name}
@@ -60,7 +61,7 @@ export class CertificatePreview extends React.PureComponent {
             position={qrPosition}
             onStop={(e, data) => handleStop('qr', data)}
           >
-            <div className="absolute cursor-move">
+            <div className="absolute cursor-move top-0">
               <QRCode value={qr} size={qrSize} />
             </div>
           </Draggable>
@@ -83,7 +84,10 @@ function CertificateGenerator() {
   const [fontWeight, setFontWeight] = useState('normal');
   const [fontStyle, setFontStyle] = useState('normal');
   const [textDecoration, setTextDecoration] = useState('none');
+  const [preview, setPreview] = useState(false);
   const componentRefs = useRef([]);
+  const [input, setInput] = useState('');
+  const [qrCode, setQrcode] = useState('');
 
   const handlePrint = useReactToPrint({
     content: () => componentRefs.current[0], // Print the first certificate
@@ -127,13 +131,17 @@ function CertificateGenerator() {
     }
   }
 
+  function handleGenerateQrCode() {
+    setQrcode(input);
+  }
+
   function handleGenerateCertificates() {
     const nameList = names.split(',').map((name) => name.trim());
     setGeneratedNames(nameList);
   }
 
   return (
-    <div className="flex min-h-screen bg-bg1 bg-center bg-cover">
+    <div className="flex min-h-screen bg-gray-900">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
         <div className="grid grid-cols-1 gap-6">
@@ -153,6 +161,8 @@ function CertificateGenerator() {
                 fontWeight={fontWeight}
                 fontStyle={fontStyle}
                 textDecoration={textDecoration}
+                qr={qrCode}
+                disableDrag={true}
               />
             </div>
           ))}
@@ -177,12 +187,38 @@ function CertificateGenerator() {
         </div>
 
         <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Enter QR Code Data</label>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
+          />
+          <button
+            onClick={handleGenerateQrCode}
+            className="w-full mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
+            Generate QR Code
+          </button>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Background Color</label>
+          <input
+            type="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            className="w-full h-10 bg-gray-700 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
           <label className="block text-gray-300 font-semibold mb-2">Font Color</label>
           <input
             type="color"
             value={color}
             onChange={(e) => setColor(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full h-10 bg-gray-700 rounded-md"
           />
         </div>
 
@@ -191,10 +227,26 @@ function CertificateGenerator() {
           <select
             value={font}
             onChange={(e) => setFont(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
           >
             <option value="Arial">Arial</option>
             <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Open Sans">Open Sans</option>
+            <option value="Lato">Lato</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Raleway">Raleway</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Merriweather">Merriweather</option>
+            <option value="Nunito">Nunito</option>
+            <option value="Ubuntu">Ubuntu</option>
+            <option value="Oswald">Oswald</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Pacifico">Pacifico</option>
           </select>
         </div>
 
@@ -204,7 +256,17 @@ function CertificateGenerator() {
             type="number"
             value={fontSize}
             onChange={(e) => setFontSize(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">QR Code Size</label>
+          <input
+            type="number"
+            value={qrSize}
+            onChange={(e) => setQrSize(e.target.value)}
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
           />
         </div>
 
@@ -213,10 +275,24 @@ function CertificateGenerator() {
           <select
             value={fontWeight}
             onChange={(e) => setFontWeight(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
           >
             <option value="normal">Normal</option>
             <option value="bold">Bold</option>
+            <option value="bolder">Bolder</option>
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Font Style</label>
+          <select
+            value={fontStyle}
+            onChange={(e) => setFontStyle(e.target.value)}
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
+          >
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+            <option value="oblique">Oblique</option>
           </select>
         </div>
 
@@ -225,25 +301,31 @@ function CertificateGenerator() {
           <select
             value={textDecoration}
             onChange={(e) => setTextDecoration(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full bg-gray-700 text-white p-2 rounded-md"
           >
             <option value="none">None</option>
             <option value="underline">Underline</option>
+            <option value="overline">Overline</option>
+            <option value="line-through">Line-through</option>
           </select>
         </div>
 
-        <div className="flex flex-col space-y-4 mb-4">
+        <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Generate Certificates</label>
           <button
             onClick={handleGenerateCertificates}
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
           >
-            Generate Certificates
+            Generate
           </button>
+        </div>
+
+        <div className="flex space-x-4 mb-8">
           <button
             onClick={handleDownloadAll}
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
           >
-            Download All
+            Download All as PNG
           </button>
         </div>
       </div>

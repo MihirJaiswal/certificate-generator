@@ -34,20 +34,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/certificate"
+              to="/generate"
               className={`block px-4 py-2 text-gray-100 rounded-md ${isActive('#features')}`}
               onClick={() => setIsOpen(false)}
             >
-              Single
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/multiple"
-              className={`block px-4 py-2 text-gray-100 rounded-md ${isActive('#preview')}`}
-              onClick={() => setIsOpen(false)}
-            >
-              Multiple
+              Generate
             </Link>
           </li>
         </ul>
