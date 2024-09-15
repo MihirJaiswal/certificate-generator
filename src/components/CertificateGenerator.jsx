@@ -141,7 +141,7 @@ function CertificateGenerator() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-900">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-900">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
         <div className="grid grid-cols-1 gap-6">
@@ -170,7 +170,7 @@ function CertificateGenerator() {
       </div>
 
       {/* Action Bar */}
-      <div className="w-1/4 bg-gradient-to-b from-black via-gray-900 to-black p-6 shadow-md ml-4">
+      <div className="w-full md:w-1/4 bg-gradient-to-b from-black via-gray-900 to-black p-6 shadow-md md:ml-4">
         <div className="mb-4">
           <label className="block text-gray-300 font-semibold mb-2">Upload Template</label>
           <input type="file" accept="image/*" onChange={handleUploadTemplate} className="w-full p-2 border rounded-md" />
