@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/cloudLogo.svg';
 
@@ -9,24 +10,15 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const isActive = (path) => location.pathname === path ? 'text-white' : 'text-gray-300';
+  const isActive = (path) => location.pathname === path ? 'text-blue-500' : 'text-gray-300';
 
   return (
     <nav className="bg-black border-b border-gray-700 text-gray-100 shadow-md">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center max-w-7xl">
+      <div className="container mx-auto px-4 py-3 lg:py-2 flex justify-between items-center max-w-7xl">
         {/* Logo */}
         <Link to="/" className="text-3xl font-bold flex items-center space-x-2">
           <img src={logo} alt="Logo" className="w-8" />
         </Link>
-
-        {/* Mobile Menu Trigger */}
-        <button
-          aria-label="Toggle menu"
-          className="md:hidden text-gray-100"
-          onClick={toggleMenu}
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex md:space-x-8 md:items-center">
@@ -47,6 +39,20 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+
+        {/* Mobile Menu Trigger */}
+        <div className="flex items-center space-x-4">
+          <a href="https://github.com/MihirJaiswal/certificate-generator" className="text-gray-100">
+            <FaGithub className="w-6 h-6" />
+          </a>
+          <button
+            aria-label="Toggle menu"
+            className="text-gray-100 md:hidden"
+            onClick={toggleMenu}
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
 
         {/* Mobile Sheet Menu */}
         <div
