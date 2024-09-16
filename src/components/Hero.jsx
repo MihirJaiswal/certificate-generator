@@ -1,17 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Award, CheckCircle, Lock, Github } from 'lucide-react';
+import { Mail, Award, CheckCircle, Lock, } from 'lucide-react';
 import Particles from './Particles';
 import Certificate from './Certificate';
+import {FaGithub} from 'react-icons/fa'
 
 
 export default function Hero() {
-  const [email, setEmail] = useState('');
-
-    const color = "#ffffff";
-   
-  
-
+  const color = "#ffffff";
   const features = [
     {
       icon: <Mail className="h-6 w-6 text-blue-400" />,
@@ -91,7 +87,7 @@ export default function Hero() {
               </a>
               <a href="https://github.com/MihirJaiswal/certificate-generator">
               <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold  cursor-pointer transition-all">
-              <Github/>
+              <FaGithub size={20} />
                 <span>Source</span>
               </button>
               </a>
