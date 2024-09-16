@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import google from '../assets/cloudLogo.svg'
 import udemy from '../assets/udemy.png'
 import fcc from '../assets/freecodecamp.png'
+import { motion } from 'framer-motion';
 
 export default function Certificate() {
   const [activeTemplate, setActiveTemplate] = useState(0);
@@ -10,32 +11,37 @@ export default function Certificate() {
     setActiveTemplate(index);
   };
 
-  return (
-    <div className='z-50 mt-4'>
+  return  (
+    <div className='relative mt-4 z-10'>
+      {/* Background gradients coming from behind the certificate */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden lg:overflow-visible ">
+        <div className="absolute top-12 left-1/4 w-72 h-72 bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-500 rounded-full opacity-30 blur-2xl -z-10"></div>
+        <div className="absolute top-12 left-2/4 w-96 h-96 bg-gradient-to-tl from-pink-400 via-purple-500 to-blue-600 rounded-full opacity-20 blur-3xl -z-10"></div>
+        <div className="absolute top-12 right-16 w-72 h-72 bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 rounded-full opacity-20 blur-2xl -z-10"></div>
+      </div>
       {/* Buttons to switch between certificates */}
-      <div className="flex justify-start bg-zinc-950 mt-4 py-2">
-        <button
-          className={`px-4 py-3 rounded-md flex items-center gap-2 text-lg ${activeTemplate === 0 ? 'bg-[#3e177c]' : ' text-gray-700 '}`}
-          onClick={() => handleSwitchTemplate(0)}
-        >
-          <img src={fcc} alt="" className='w-8 ' />
-        </button>
-        <button
-          className={`px-4 py-3 rounded-md flex items-center gap-2 text-lg ${activeTemplate === 1 ? ' bg-[#3e177c]' : ' text-gray-700 '}`}
-          onClick={() => handleSwitchTemplate(1)}
-        >
-          <img src={udemy} alt="" className='w-6  ' />
-        </button>
-        <button
-          className={`px-4 py-3 rounded-md flex items-center gap-2 text-lg ${activeTemplate === 2 ? ' bg-[#3e177c]' : ' text-gray-700 '}`}
-          onClick={() => handleSwitchTemplate(2)}
-        >
-          <img src={google} alt="" className='w-6 ' />
-        </button>
+      <div className="flex justify-start bg-zinc-950 mt-4 py-2 relative z-50">
+        {['fcc', 'udemy', 'google'].map((logo, index) => (
+          <motion.button
+            key={index}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className={`px-4 py-3 rounded-md flex items-center gap-2 text-lg ${
+              activeTemplate === index ? 'bg-[#3e177c]' : 'text-gray-700'
+            }`}
+            onClick={() => handleSwitchTemplate(index)}
+          >
+            <img src={index === 0 ? fcc : index === 1 ? udemy : google} alt="" className="w-6" />
+          </motion.button>
+        ))}
       </div>
 
       {/* Certificate Preview */}
-      <div className="relative max-w-4xl mx-auto  w-full">
+      <motion.div 
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative max-w-4xl mx-auto  w-full z-50">
         {activeTemplate === 0 && (
           <div className="relative bg-neutral-900 border border-gray-600 md:h-full p-4 shadow-2xl z-10">
             <div className="p-6 bg-gradient-to-b from-black via-gray-950 to-indigo-950  shadow-md h-full flex flex-col justify-center">
@@ -107,7 +113,7 @@ export default function Certificate() {
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

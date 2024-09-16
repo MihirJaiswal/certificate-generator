@@ -36,12 +36,12 @@ export default function Hero() {
       <main className="relative  z-10">
         {/* Hero Section */}
       
-        <section className=" bg-gradient-to-b from-black via-purple-950 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center gap-x-12 lg:justify-center">
+        <section className=" bg-gradient-to-b from-black via-neutral-800 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center gap-x-12 lg:justify-center">
         
           <div className="">
           <Particles
         className="absolute inset-0 pointer-events-none"
-        quantity={400}
+        quantity={250}
         ease={100}
         color={color}
         
@@ -81,12 +81,12 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <a href="/generate">
-              <button className="bg-[#5620AC] text-gray-50 px-6 py-3 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold  cursor-pointer transition-all">
+              <button className="bg-[#5620AC] text-gray-50 px-6 py-3 sm:px-8 sm:py-3 rounded-md text-lg font-semibold  cursor-pointer transition-all">
                 Start Creating
               </button>
               </a>
               <a href="https://github.com/MihirJaiswal/certificate-generator">
-              <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-sm text-lg font-semibold  cursor-pointer transition-all">
+              <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-md text-lg font-semibold  cursor-pointer transition-all">
               <FaGithub size={20} />
                 <span>Source</span>
               </button>
@@ -102,11 +102,17 @@ export default function Hero() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-24 h-24 sm:w-36 sm:h-36 bg-gradient-to-br from-pink-500 to-yellow-500 rounded-full opacity-30 blur-2xl"></div>
           <div className="absolute bottom-0 right-0 w-36 h-36 sm:w-48 sm:h-48 bg-gradient-to-tl from-green-400 to-blue-500 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute top-1/3 right-0 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tl from-purple-500 to-indigo-500 rounded-full opacity-20 blur-xl"></div>
+          <div className="absolute top-64 lg:top-28 lg:right-40 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tl from-purple-500 to-indigo-500 rounded-full opacity-5 blur-xl"></div>
+        </div>
+
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-24 h-24 sm:w-36 sm:h-36 bg-gradient-to-br from-pink-500 to-yellow-500 rounded-full opacity-5 blur-2xl"></div>
+          <div className="absolute bottom-0 right-0 w-36 h-36 sm:w-48 sm:h-48 bg-gradient-to-tl from-green-400 to-blue-500 rounded-full opacity-5 blur-3xl"></div>
+          <div className="absolute top-28 right-0 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tl from-pink-500 to-yellow-500 rounded-full opacity-5 blur-xl"></div>
         </div>
 
         {/* Features Section */}
-        <section id="features" className="pb-16 pt-10 bg-[#040713] ">
+        <section id="features" className="pb-16 pt-10 bg-gradient-to-b from-[#090E18] to-[#080E18]  relative">
           <div className="container mx-auto px-4 relative font-poppins">
             <h2 className="text-4xl font-bold text-center mb-12 text-gray-100">
               Features

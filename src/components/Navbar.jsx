@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/cloudLogo.svg'
+import logo from '../assets/cloudLogo.svg';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const isActive = (path) => location.pathname === path ? ' text-white' : 'text-gray-300';
+  const isActive = (path) => location.pathname === path ? 'text-white' : 'text-gray-300';
 
   return (
     <nav className="bg-black border-b border-gray-700 text-gray-100 shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center max-w-7xl">
+        {/* Logo */}
         <Link to="/" className="text-3xl font-bold flex items-center space-x-2">
-          <img src={logo} alt="" className='w-8' />
+          <img src={logo} alt="Logo" className="w-8" />
         </Link>
+
+        {/* Mobile Menu Trigger */}
         <button
           aria-label="Toggle menu"
           className="md:hidden text-gray-100"
@@ -24,12 +27,13 @@ const Navbar = () => {
         >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
-        <ul className={`md:flex md:space-x-8 md:items-center absolute md:static top-full left-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-300 ease-in-out ${isOpen ? 'block' : 'hidden'}`}>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex md:space-x-8 md:items-center">
           <li>
             <Link
               to="/"
               className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/')}`}
-              onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
@@ -38,12 +42,57 @@ const Navbar = () => {
             <Link
               to="/generate"
               className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/generate')}`}
-              onClick={() => setIsOpen(false)}
             >
               Generate
             </Link>
           </li>
         </ul>
+
+        {/* Mobile Sheet Menu */}
+        <div
+          className={`fixed top-0 right-0 h-full w-64 bg-gray-900 text-gray-100 transform transition-transform duration-300 ease-in-out ${
+            isOpen ? 'translate-x-0' : 'translate-x-full'
+          } md:hidden z-50`}
+        >
+          <div className="flex justify-between items-center p-4">
+            <img src={logo} alt="Logo" className="w-8" />
+            <button
+              aria-label="Close menu"
+              className="text-gray-100"
+              onClick={toggleMenu}
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+          <ul className="mt-4 space-y-4">
+            <li>
+              <Link
+                to="/"
+                className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/')}`}
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/generate"
+                className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/generate')}`}
+                onClick={() => setIsOpen(false)}
+              >
+                Generate
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Overlay */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-40"
+            onClick={toggleMenu}
+          ></div>
+        )}
       </div>
     </nav>
   );
