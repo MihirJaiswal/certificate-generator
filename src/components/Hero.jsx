@@ -1,13 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Award, CheckCircle, Lock, } from 'lucide-react';
+import { Mail, Award, CheckCircle, Lock } from 'lucide-react';
 import Particles from './Particles';
 import Certificate from './Certificate';
-import {FaGithub} from 'react-icons/fa'
-
+import { FaGithub } from 'react-icons/fa';
 
 export default function Hero() {
-  const color = "#ffffff";
+  const color = "#CE93D8";
   const features = [
     {
       icon: <Mail className="h-6 w-6 text-blue-400" />,
@@ -33,69 +32,74 @@ export default function Hero() {
 
   return (
     <div className="relative min-h-screen text-gray-100">
-      <main className="relative  z-10">
+      <main className="relative z-10">
         {/* Hero Section */}
+        <Particles
+              className="absolute inset-0 pointer-events-none z-0"
+              quantity={250}
+              ease={100}
+              color={color}
+              refresh
+            />
+        <section className="bg-gradient-to-b from-black via-neutral-800 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row  gap-x-12 lg:justify-center">
+    <div className="flex-col flex justify-start gap-10 lg:py-8 mx-8 lg:mt-16 relative">
+      <div className="flex flex-col gap-8 justify-center py-2 items-center w-full ">
+        <span className="text-6xl font-black lg:text-8xl">Auto.gen</span>
+        <div className="flex flex-col gap-4 justify-center text-2xl font-bold text-center lg:text-3xl">
+          <div>Generate, customize, and manage</div>
+          <div className="underline-highlight">certificates with ease..</div>
+        </div>
+      </div>
       
-        <section className=" bg-gradient-to-b from-black via-neutral-800 to-gray-950 mx-auto px-4 pt-16 pb-8 md:py-20 text-center flex flex-col lg:flex-row lg:items-center gap-x-12 lg:justify-center">
-        
-          <div className="">
-          <Particles
-        className="absolute inset-0 pointer-events-none"
-        quantity={250}
-        ease={100}
-        color={color}
-        
-        size={1}
-        refresh
-      />
-      <div className="absolute pointer-events-none inset-0 w-full h-full bg-gradient-to-r from-black via-gray-900 to-gray-950 blur-xl rounded-lg opacity-60 z-0"></div>
-            <motion.h1
-              className="text-5xl relative md:text-6xl lg:text-[5rem] font-extrabold mb-5 md:mb-10 text-white"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+      <div className="text-lg justify-center items-center flex gap-4 z-50 relative">
+        <a
+          className="p-3 w-1/2 text-center bg-violet-600 dark:bg-violet-800 text-white hover:dark:bg-violet-900 transition hover:bg-violet-700 duration-300"
+          href="/generate"
+        >
+          <p>Get Started</p>
+        </a>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 w-1/2 justify-center flex gap-2 items-center dark:bg-gray-300 bg-violet-200 text-black transition duration-300 hover:dark:bg-gray-400 hover:bg-violet-300"
+          href="https://github.com/MihirJaiswal/certificate-generator"
+        >
+          <FaGithub size={20} />
+          <p>Source</p>
+        </a>
+      </div>
+      
+      <div className="text-lg flex-col flex gap-2 items-center z-50 relative">
+        <a
+          href="/templates"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex flex-col md:flex-row w-full items-center md:justify-between text-sm dark:bg-neutral-900/50 font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-50/60 backdrop-blur px-4 py-3 border border-neutral-300 dark:border-neutral-800 rounded-md ring-[6px] ring-black/[0.02] dark:ring-black/10"
+        >
+          <span>Looking for some templates?</span>
+          <span className="flex gap-0.5 items-center font-semibold text-violet-600 dark:text-violet-400 group mt-1 md:mt-0">
+            <p className=''>checkout</p>
+            <svg
+              className="size-3 [&_polyline]:stroke-[px] transition group-hover:translate-x-0.5 mt-1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 256 256"
             >
-              Certi-
-              <span className='text-red-50  '>GEN</span>
-            </motion.h1>
-            <motion.p
-              className="md:mb-3 relative mb-2 text-lg lg:font-bold leading-2 tracking-wide text-gray-900 lg:text-3xl dark:text-white"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Generate, customize, and manage 
-            </motion.p>
-            <motion.p
-              className="mb-10 lg:mb-6 relative lg:font-bold leading-6 tracking-wide text-gray-900 text-lg lg:text-3xl dark:text-white"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-               certificates with ease.
-            </motion.p>
-            <motion.div  
-              className="flex relative flex-row justify-center items-center gap-4 lg:pt-6 z-50"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <a href="/generate">
-              <button className="bg-[#5620AC] text-gray-50 px-6 py-3 sm:px-8 sm:py-3 rounded-md text-lg font-semibold  cursor-pointer transition-all">
-                Start Creating
-              </button>
-              </a>
-              <a href="https://github.com/MihirJaiswal/certificate-generator">
-              <button className="bg-gray-100  flex items-center justify-between gap-2 text-gray-900 px-6 py-3 lg:px-8 sm:px-8 sm:py-3 rounded-md text-lg font-semibold  cursor-pointer transition-all">
-              <FaGithub size={20} />
-                <span>Source</span>
-              </button>
-              </a>
-            </motion.div>
-          </div>
-
+              <rect width="256" height="256" fill="none"></rect>
+              <polyline
+                points="96 48 176 128 96 208"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="16"
+              ></polyline>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
           {/* Certificate Preview Section */}
-         <Certificate/>
+          <Certificate />
         </section>
 
         {/* Decorative Elements */}
@@ -112,7 +116,7 @@ export default function Hero() {
         </div>
 
         {/* Features Section */}
-        <section id="features" className="pb-16 pt-10 bg-gradient-to-b from-[#090E18] to-[#080E18]  relative">
+        <section id="features" className="pb-16 pt-10 bg-gradient-to-b from-[#040813] to-[#021b3b] relative">
           <div className="container mx-auto px-4 relative font-poppins">
             <h2 className="text-4xl font-bold text-center mb-12 text-gray-100">
               Features

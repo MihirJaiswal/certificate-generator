@@ -38,6 +38,14 @@ const Navbar = () => {
               Generate
             </Link>
           </li>
+          <li>
+            <Link
+              to="/templates"
+              className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/generate')}`}
+            >
+              Templates
+            </Link>
+          </li>
         </ul>
 
         {/* Mobile Menu Trigger */}
@@ -56,7 +64,7 @@ const Navbar = () => {
 
         {/* Mobile Sheet Menu */}
         <div
-          className={`fixed top-0 right-0 h-full w-64 bg-gray-900 text-gray-100 transform transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 h-full w-64 bg-black border-l border-gray-600 text-gray-100 transform transition-transform duration-300 ease-in-out ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           } md:hidden z-50`}
         >
@@ -87,6 +95,15 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Generate
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/template"
+                className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/generate')}`}
+                onClick={() => setIsOpen(false)}
+              >
+                Template
               </Link>
             </li>
           </ul>
