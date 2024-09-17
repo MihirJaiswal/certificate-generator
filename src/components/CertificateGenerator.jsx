@@ -143,7 +143,7 @@ function CertificateGenerator() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-purple-950 to-gray-950">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-gray-950 to-blue-950 ">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
         {showInstructions && generatedNames.length === 0 ? (

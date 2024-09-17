@@ -4,6 +4,7 @@ import { Mail, Award, CheckCircle, Lock } from 'lucide-react';
 import Particles from './Particles';
 import Certificate from './Certificate';
 import { FaGithub } from 'react-icons/fa';
+import { FeaturesSectionDemo } from './Provider';
 
 export default function Hero() {
   const color = "#CE93D8";
@@ -116,27 +117,16 @@ export default function Hero() {
         </div>
 
         {/* Features Section */}
-        <section id="features" className="pb-16 pt-10 bg-gradient-to-b from-[#040813] to-[#021b3b] relative">
-          <div className="container mx-auto px-4 relative font-poppins">
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-100">
-              Features
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gray-900 border border-gray-500 p-6 rounded-lg text-center shadow-lg flex flex-col items-center justify-center hover:shadow-2xl transition-shadow"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <div className="mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-300">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+      <div className='bg-[#030712] relative'>
+      <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-8 right-0 w-24 h-24 sm:w-36 sm:h-36 bg-gradient-to-br from-pink-500 to-yellow-500 rounded-full opacity-30 blur-2xl"></div>
+          <div className="absolute bottom-12 right-0 w-36 h-36 sm:w-48 sm:h-48 bg-gradient-to-tl from-green-400 to-blue-500 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute top-56 lg:top-28 lg:right-40 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tl from-purple-500 to-indigo-500 rounded-full opacity-5 blur-xl"></div>
+        </div>
+      <FeaturesSectionDemo/>
+
+      </div>
+
       </main>
     </div>
   );
