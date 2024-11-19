@@ -20,6 +20,9 @@ export class CertificatePreview extends React.PureComponent {
       qrPosition,
       qrSize,
       template,
+      customImage,
+      customImagePosition,
+      customImageSize,
       innerRef,
       handleStop
     } = this.props;
@@ -36,6 +39,7 @@ export class CertificatePreview extends React.PureComponent {
         <Draggable
           position={position}
           onStop={(e, data) => handleStop('name', data)}
+          bounds="parent"
           defaultClassName="no-border"
         >
           <h1
@@ -59,9 +63,35 @@ export class CertificatePreview extends React.PureComponent {
           <Draggable
             position={qrPosition}
             onStop={(e, data) => handleStop('qr', data)}
+            bounds="parent"
           >
             <div className="absolute cursor-move top-0">
               <QRCode value={qr} size={qrSize} />
+            </div>
+          </Draggable>
+        )}
+
+        {customImage && (
+          <Draggable
+            position={customImagePosition}
+            onStop={(e, data) => handleStop('customImage', data)}
+            bounds="parent"
+            defaultClassName="draggable-image"
+          >
+            <div 
+              className="absolute cursor-move top-0"
+              style={{
+                width: `${customImageSize}px`,
+                height: 'auto',
+                zIndex: 10
+              }}
+            >
+              <img
+                src={customImage}
+                alt="Custom"
+                className="w-full h-auto"
+                draggable="false"
+              />
             </div>
           </Draggable>
         )}
@@ -72,7 +102,7 @@ export class CertificatePreview extends React.PureComponent {
 
 function CertificateGenerator() {
   const [names, setNames] = useState('');
-  const [generatedNames, setGeneratedNames] = useState(['Sample Name']); // Initialize with a sample name
+  const [generatedNames, setGeneratedNames] = useState(['Sample Name']);
   const [template, setTemplate] = useState(null);
   const [position, setPosition] = useState({ x: 140, y: 140 });
   const [qrPosition, setQrPosition] = useState({ x: 200, y: 200 });
@@ -83,13 +113,16 @@ function CertificateGenerator() {
   const [fontWeight, setFontWeight] = useState('normal');
   const [fontStyle, setFontStyle] = useState('normal');
   const [textDecoration, setTextDecoration] = useState('none');
+  const [customImage, setCustomImage] = useState(null);
+  const [customImagePosition, setCustomImagePosition] = useState({ x: 100, y: 100 });
+  const [customImageSize, setCustomImageSize] = useState(100);
   const componentRefs = useRef([]);
   const [input, setInput] = useState('');
   const [qrCode, setQrcode] = useState('');
   const [showInstructions, setShowInstructions] = useState(true);
 
   const handlePrint = useReactToPrint({
-    content: () => componentRefs.current[0],  
+    content: () => componentRefs.current[0],
   });
 
   const handleDownloadAll = async () => {
@@ -115,7 +148,22 @@ function CertificateGenerator() {
 
     reader.onloadend = () => {
       setTemplate(reader.result);
-      setShowInstructions(false); // Hide instructions when template is uploaded
+      setShowInstructions(false);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function handleUploadCustomImage(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setCustomImage(reader.result);
+      // Reset position when new image is uploaded
+      setCustomImagePosition({ x: 100, y: 100 });
     };
 
     if (file) {
@@ -124,10 +172,20 @@ function CertificateGenerator() {
   }
 
   function handleStop(type, data) {
-    if (type === 'name') {
-      setPosition({ x: data.x, y: data.y });
-    } else if (type === 'qr') {
-      setQrPosition({ x: data.x, y: data.y });
+    const newPosition = { x: data.x, y: data.y };
+    
+    switch(type) {
+      case 'name':
+        setPosition(newPosition);
+        break;
+      case 'qr':
+        setQrPosition(newPosition);
+        break;
+      case 'customImage':
+        setCustomImagePosition(newPosition);
+        break;
+      default:
+        break;
     }
   }
 
@@ -139,6 +197,7 @@ function CertificateGenerator() {
     const nameList = names.split(',').map((name) => name.trim());
     setGeneratedNames(nameList);
   }
+
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-gray-950 to-blue-950">
@@ -187,6 +246,9 @@ function CertificateGenerator() {
                   fontStyle={fontStyle}
                   textDecoration={textDecoration}
                   qr={qrCode}
+                  customImage={customImage}
+                  customImagePosition={customImagePosition}
+                  customImageSize={customImageSize}
                 />
               </div>
             ))}
@@ -283,6 +345,39 @@ function CertificateGenerator() {
             className="w-full bg-gray-700 text-white p-2 rounded-md"
           />
         </div>
+
+         <div className="mb-4">
+          <label className="block text-gray-300 font-semibold mb-2">Upload Custom Image</label>
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handleUploadCustomImage} 
+            className="w-full p-2 border rounded-md" 
+          />
+        </div>
+
+        {customImage && (
+          <>
+            <div className="mb-4">
+              <label className="block text-gray-300 font-semibold mb-2">Custom Image Size</label>
+              <input
+                type="number"
+                value={customImageSize}
+                onChange={(e) => setCustomImageSize(Number(e.target.value))}
+                className="w-full bg-gray-700 text-white p-2 rounded-md"
+              />
+            </div>
+
+            <div className="mb-4">
+              <button
+                onClick={() => setCustomImage(null)}
+                className="w-full bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+              >
+                Remove Custom Image
+              </button>
+            </div>
+          </>
+        )}
 
         <div className="mb-4">
           <label className="block text-gray-300 font-semibold mb-2">QR Code Size</label>
