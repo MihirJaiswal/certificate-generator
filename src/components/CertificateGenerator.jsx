@@ -74,11 +74,11 @@ function CertificateGenerator() {
   const [names, setNames] = useState('');
   const [generatedNames, setGeneratedNames] = useState(['Sample Name']); // Initialize with a sample name
   const [template, setTemplate] = useState(null);
-  const [position, setPosition] = useState({ x: 10, y: 10 });
+  const [position, setPosition] = useState({ x: 140, y: 140 });
   const [qrPosition, setQrPosition] = useState({ x: 200, y: 200 });
   const [color, setColor] = useState('#000000');
   const [font, setFont] = useState('Arial');
-  const [fontSize, setFontSize] = useState(24);
+  const [fontSize, setFontSize] = useState(48);
   const [qrSize, setQrSize] = useState(100);
   const [fontWeight, setFontWeight] = useState('normal');
   const [fontStyle, setFontStyle] = useState('normal');
