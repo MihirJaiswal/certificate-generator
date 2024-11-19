@@ -89,7 +89,7 @@ function CertificateGenerator() {
   const [showInstructions, setShowInstructions] = useState(true);
 
   const handlePrint = useReactToPrint({
-    content: () => componentRefs.current[0],
+    content: () => componentRefs.current[0],  
   });
 
   const handleDownloadAll = async () => {
