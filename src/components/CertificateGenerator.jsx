@@ -24,13 +24,12 @@ export class CertificatePreview extends React.PureComponent {
       handleStop
     } = this.props;
 
-    // Convert color using Color library
-    const convertedColor = Color(color).hex(); // Ensure color is in a supported format
+    const convertedColor = Color(color).hex();
 
     return (
       <div
         className="relative w-full h-auto p-4"
-        ref={innerRef} // Use ref for capturing screenshot
+        ref={innerRef}
       >
         <img src={template} alt="template" className="w-full h-auto" />
 
@@ -48,11 +47,11 @@ export class CertificatePreview extends React.PureComponent {
               fontWeight: fontWeight,
               fontStyle: fontStyle,
               textDecoration: textDecoration,
-              outline: 'none', // Remove outline
+              outline: 'none',
               boxShadow: 'none',
             }}
           >
-            {name}
+            {name || 'Sample Name'}
           </h1>
         </Draggable>
 
@@ -73,7 +72,7 @@ export class CertificatePreview extends React.PureComponent {
 
 function CertificateGenerator() {
   const [names, setNames] = useState('');
-  const [generatedNames, setGeneratedNames] = useState([]);
+  const [generatedNames, setGeneratedNames] = useState(['Sample Name']); // Initialize with a sample name
   const [template, setTemplate] = useState(null);
   const [position, setPosition] = useState({ x: 10, y: 10 });
   const [qrPosition, setQrPosition] = useState({ x: 200, y: 200 });
@@ -84,14 +83,13 @@ function CertificateGenerator() {
   const [fontWeight, setFontWeight] = useState('normal');
   const [fontStyle, setFontStyle] = useState('normal');
   const [textDecoration, setTextDecoration] = useState('none');
-  const [preview, setPreview] = useState(false);
   const componentRefs = useRef([]);
   const [input, setInput] = useState('');
   const [qrCode, setQrcode] = useState('');
   const [showInstructions, setShowInstructions] = useState(true);
 
   const handlePrint = useReactToPrint({
-    content: () => componentRefs.current[0], // Print the first certificate
+    content: () => componentRefs.current[0],
   });
 
   const handleDownloadAll = async () => {
@@ -117,6 +115,7 @@ function CertificateGenerator() {
 
     reader.onloadend = () => {
       setTemplate(reader.result);
+      setShowInstructions(false); // Hide instructions when template is uploaded
     };
 
     if (file) {
@@ -139,38 +138,36 @@ function CertificateGenerator() {
   function handleGenerateCertificates() {
     const nameList = names.split(',').map((name) => name.trim());
     setGeneratedNames(nameList);
-    setShowInstructions(false); // Hide instructions after generating certificates
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-gray-950 to-blue-950 ">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-b from-black via-gray-950 to-blue-950">
       {/* Certificates Preview */}
       <div className="flex-1 p-6">
-        {showInstructions && generatedNames.length === 0 ? (
+        {!template ? (
           <div className="bg-gray-950 border border-gray-700 p-6 rounded-lg text-gray-100 shadow-lg">
-          <h2 className="text-2xl lg:text-4xl font-bold mb-8 text-blue-400">How to Use the Certificate Generator</h2>
-          <ol className="list-decimal list-inside space-y-2 lg:space-y-4 lg:text-lg">
-            <li>
-              <span className="font-semibold">Upload</span> a template image for your certificate.
-            </li>
-            <li>
-              <span className="font-semibold">Enter names</span> separated by commas.
-            </li>
-            <li>
-              <span className="font-semibold">Click "Generate"</span> to create your certificates.
-            </li>
-            <li>
-              <span className="font-semibold">Enter QR code data</span> if needed.
-            </li>
-            <li>
-              <span className="font-semibold">Customize</span> the font, color, and position for the name and QR code.
-            </li>
-            <li>
-              <span className="font-semibold">Preview and download</span> all generated certificates as PNG files.
-            </li>
-          </ol>
-        </div>
-
+            <h2 className="text-2xl lg:text-4xl font-bold mb-8 text-blue-400">How to Use the Certificate Generator</h2>
+            <ol className="list-decimal list-inside space-y-2 lg:space-y-4 lg:text-lg">
+              <li>
+                <span className="font-semibold">Upload</span> a template image for your certificate.
+              </li>
+              <li>
+                <span className="font-semibold">Enter names</span> separated by commas.
+              </li>
+              <li>
+                <span className="font-semibold">Click "Generate"</span> to create your certificates.
+              </li>
+              <li>
+                <span className="font-semibold">Enter QR code data (if any ) </span> if needed.
+              </li>
+              <li>
+                <span className="font-semibold">Customize</span> the font, color, and position for the name and QR code.
+              </li>
+              <li>
+                <span className="font-semibold">Preview and download</span> all generated certificates as PNG files.
+              </li>
+            </ol>
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-6">
             {generatedNames.map((name, index) => (
