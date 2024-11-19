@@ -38,14 +38,6 @@ const Navbar = () => {
               Generate
             </Link>
           </li>
-          <li>
-            <Link
-              to="/templates"
-              className={`block px-4 py-2 rounded-md transition-colors duration-200 ${isActive('/generate')}`}
-            >
-              Templates
-            </Link>
-          </li>
         </ul>
 
         {/* Mobile Menu Trigger */}
